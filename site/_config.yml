@@ -1,0 +1,27 @@
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "" # the subpath of your site, e.g. /blog
+title: "Nikolay Voynov. Exposure" # the name of your site, e.g. ACME Corp.
+author_name: Nikolay Voynov
+author_email: nvoynov@gmail.com
+author_location: Kyiv, Ukraine
+
+collections:
+  series:
+    output: true
+    permalink: /series/:slug/
+
+source: site
+destination: site/_site
+
+# Active SEO plugins
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Base URL of your live website (Required for sitemap generation)
+url: "https://nvoynov.github.io"
+# Base path if your site is inside a subfolder, e.g., "/web-exposure"
+baseurl: "/exposure" 
+
+# FIX: Manually specify repository to bypass local GitHub API environment checks
+repository: "nvoynov/exposure"

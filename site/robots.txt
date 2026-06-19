@@ -1,0 +1,9 @@
+---
+layout: null
+---
+User-agent: *
+Allow: /
+
+# Direct link to the automatically generated sitemap
+Sitemap: {{ site.url }}{{ site.baseurl }}/sitemap.xml
+

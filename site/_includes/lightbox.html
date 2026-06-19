@@ -1,0 +1,251 @@
+<!-- Fullscreen Lightbox Overlay (Multi-Environment Fine-Art Component) -->
+<div id="lightbox" class="lightbox theme-classic">
+  <div class="lightbox-toolbar">
+    <!-- Toggles between Classic, Museum (Wau), Light Room, and Dark Room environments -->
+    <button id="bg-toggle" title="Switch Environment (Classic / Museum / Light Room / Dark Room)">⬜⬛</button>
+    <span class="close-btn" title="Close (Esc)">&times;</span>
+  </div>
+
+  <span class="nav-btn prev-btn" title="Previous">&#10094;</span>
+  <span class="nav-btn next-btn" title="Next">&#10095;</span>
+  
+  <div class="lightbox-content">
+    
+    <!-- THE DYNAMIC ARTWORK FRAME COMPLEX -->
+    <div class="lightbox-outer-baguette">
+      <div class="lightbox-passepartout">
+        <div class="lightbox-bevel-edge">
+          <img id="lightbox-img" src="" alt="">
+        </div>
+      </div>
+    </div>
+    
+    <div id="lightbox-meta" class="lightbox-meta"></div>
+  </div>
+</div>
+
+<style>
+  /* Base Lightbox Layout Overlay */
+  .lightbox { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; justify-content: center; align-items: center; transition: background-color 0.4s ease, color 0.4s ease; }
+  .lightbox-toolbar { position: absolute; top: 20px; right: 30px; display: flex; align-items: center; gap: 20px; z-index: 1020; }
+  #bg-toggle { background: none; border: 1px solid currentColor; color: inherit; padding: 5px 10px; cursor: pointer; font-size: 0.8rem; opacity: 0.6; border-radius: 3px; }
+  .close-btn { color: inherit; font-size: 35px; cursor: pointer; line-height: 1; opacity: 0.6; }
+  
+  .lightbox-content { 
+    position: relative; 
+    max-width: 90%; 
+    max-height: 88%; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+  }
+
+  /* 
+     ENVIRONMENT 1: THE CLASSIC MODE (NEW DEFAULT - PHOTO ON ALUMINUM PLATE)
+     Neutral grey wall, zero museum borders. 
+     The photo is printed with uniform 1cm analog paper borders and mounted on a solid board
+     that "floats" over the wall, casting a soft shadow.
+  */
+  .lightbox.theme-classic { background-color: #7c7c7c; color: #fff; }
+  
+  /* Reset outer baguette frame entirely and convert to flex to kill inline ghost gaps */
+  .lightbox.theme-classic .lightbox-outer-baguette { 
+    background-color: transparent; 
+    border: none; 
+    padding: 0; 
+    box-shadow: 0 25px 65px rgba(0,0,0,0.45); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* 
+     DEMOCRATIC GEOMETRIC SYMMETRY:
+     Overrides the asymmetrical museum rule to guarantee that 
+     all four margins around the print are exactly identical (1.5vw).
+  */
+  .lightbox.theme-classic .lightbox-passepartout { 
+    background-color: #ffffff; 
+    padding: 1.5vw !important; /* Force equal padding on all 4 sides */
+    box-shadow: none; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Completely removed the beveled edge border and clear any internal layout artifacts */
+  .lightbox.theme-classic .lightbox-bevel-edge { 
+    border: none !important; 
+    box-shadow: none !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Clear the ghost line space underneath the image tag inside the container */
+  .lightbox.theme-classic #lightbox-img {
+    display: block;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Moves text block slightly lower to isolate it from the white plate geometry */
+  .lightbox.theme-classic .lightbox-meta {
+    margin-top: 20px !important; 
+  }
+
+  /* 
+     ENVIRONMENT 2: THE MUSEUM MODE (THE ORIGINAL WAU-EFFECT)
+     Gallery mid-grey background, deep black frame, crisp white mat board with a 2px bevel.
+  */
+  .lightbox.theme-neutral { background-color: #7c7c7c; color: #fff; }
+  .lightbox.theme-neutral .lightbox-outer-baguette { background-color: #161616; border: 1px solid #080808; box-shadow: 0 35px 90px rgba(0,0,0,0.7); padding: 1.2vw; }
+  .lightbox.theme-neutral .lightbox-passepartout { background-color: #ffffff; box-shadow: inset 0 0 25px rgba(0,0,0,0.55); padding: 4vw 4vw 4.6vw 4vw; }
+  .lightbox.theme-neutral .lightbox-bevel-edge { border: 2px solid #d4d4d4; box-shadow: inset 0 0 4px rgba(0,0,0,0.15); }
+
+  /* 
+     ENVIRONMENT 3: THE LIGHT ROOM MODE 
+     Soft linen/ivory pastel background, dark matte metallic frame profile, warm cream mat board.
+  */
+  .lightbox.theme-light { background-color: #f2efe9; color: #1a1a1a; }
+  .lightbox.theme-light .lightbox-outer-baguette { background-color: #3a3d40; border: 1px solid #2b2e30; box-shadow: 0 20px 50px rgba(140,135,125,0.25); padding: 1.2vw; }
+  .lightbox.theme-light .lightbox-passepartout { background-color: #faf8f5; box-shadow: inset 0 0 18px rgba(0,0,0,0.35); padding: 4vw 4vw 4.6vw 4vw; }
+  .lightbox.theme-light .lightbox-bevel-edge { border: 2px solid #e2ded5; box-shadow: inset 0 0 4px rgba(0,0,0,0.15); }
+
+  /* 
+     ENVIRONMENT 4: THE DARK ROOM MODE 
+     Deep midnight blue velvet background, steel grey frame, glowing white mat board.
+  */
+  .lightbox.theme-dark { background-color: #12161f; color: #fff; }
+  .lightbox.theme-dark .lightbox-outer-baguette { background-color: #2c313c; border: 1px solid #1e222b; box-shadow: 0 40px 100px rgba(0,0,0,0.9); padding: 1.2vw; }
+  .lightbox.theme-dark .lightbox-passepartout { background-color: #ffffff; box-shadow: inset 0 0 30px rgba(0,0,0,0.6); padding: 4vw 4vw 4.6vw 4vw; }
+  .lightbox.theme-dark .lightbox-bevel-edge { border: 2px solid #e2e2e2; box-shadow: inset 0 0 4px rgba(0,0,0,0.15); }
+
+
+  /* TRANSITION WRAPPERS FOR MUSEUM MODES */
+  .lightbox-outer-baguette {
+    display: inline-block;
+    box-sizing: border-box;
+    transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
+  }
+
+  .lightbox-passepartout {
+    display: block;
+    box-sizing: border-box;
+    transition: background-color 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
+  }
+
+  .lightbox-bevel-edge {
+    display: inline-block;
+    box-sizing: border-box;
+    position: relative;
+    transition: border-color 0.4s ease, border-width 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  /* 
+     CURATORIAL METADATA TUNING:
+     Completely hides the photo titles in Museum, Light Room, and Dark Room modes 
+     to keep the physical frame setup pure, silent, and uncluttered.
+  */
+  .lightbox.theme-neutral .lightbox-meta,
+  .lightbox.theme-light   .lightbox-meta,
+  .lightbox.theme-dark    .lightbox-meta {
+    display: none !important;
+  }
+
+
+  /* LAYER 1: THE PHOTOGRAPH */
+  #lightbox-img { 
+    max-width: 100%; 
+    max-height: 60vh; 
+    object-fit: contain; 
+    display: block;
+    position: relative;
+    box-shadow: 0 0 6px rgba(0,0,0,0.25); 
+  }
+  
+  .lightbox-meta { margin-top: 25px; font-size: 0.85rem; letter-spacing: 0.5px; text-align: center; opacity: 0.8; }
+  .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); color: inherit; font-size: 30px; padding: 20px; cursor: pointer; user-select: none; z-index: 1010; opacity: 0.4; }
+  .nav-btn:hover { opacity: 1; }
+  .prev-btn { left: 20px; }
+  .next-btn { right: 20px; }
+</style>
+
+<script>
+  window.activeGalleryPhotos = [];
+  window.currentGalleryIndex = 0;
+
+  window.openLightboxWithIndex = function(index, photosArray) {
+    window.activeGalleryPhotos = photosArray;
+    window.currentGalleryIndex = index;
+    window.updateLightboxView();
+    document.getElementById('lightbox').style.display = 'flex';
+  };
+
+  window.updateLightboxView = function() {
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxMeta = document.getElementById('lightbox-meta');
+    const photo = window.activeGalleryPhotos[window.currentGalleryIndex];
+    
+    lightboxImg.src = photo.fullUrl;
+    
+    if (photo.title && photo.title.trim() !== "") {
+      lightboxMeta.innerHTML = `<strong>${photo.title}</strong>`;
+      lightboxMeta.style.display = 'block';
+    } else {
+      lightboxMeta.innerHTML = '';
+      lightboxMeta.style.display = 'none';
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const lightbox = document.getElementById('lightbox');
+    const bgToggle = document.getElementById('bg-toggle');
+    
+    // Four environments loop array (Classic is now the zero index entry)
+    const themes = ['theme-classic', 'theme-neutral', 'theme-light', 'theme-dark'];
+    
+    const savedTheme = localStorage.getItem('exposure_lightbox_theme');
+    let currentThemeIndex = themes.includes(savedTheme) ? themes.indexOf(savedTheme) : 0;
+    lightbox.className = `lightbox ${themes[currentThemeIndex]}`;
+
+    bgToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      lightbox.classList.remove(themes[currentThemeIndex]);
+      currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+      const newTheme = themes[currentThemeIndex];
+      lightbox.className = `lightbox ${newTheme}`;
+      localStorage.setItem('exposure_lightbox_theme', newTheme);
+    });
+
+    function navigateGallery(direction) {
+      if (!window.activeGalleryPhotos || window.activeGalleryPhotos.length === 0) return;
+      let newIndex = window.currentGalleryIndex + direction;
+      if (newIndex >= window.activeGalleryPhotos.length) newIndex = 0;
+      else if (newIndex < 0) newIndex = window.activeGalleryPhotos.length - 1;
+      
+      window.currentGalleryIndex = newIndex;
+      window.updateLightboxView();
+    }
+
+    document.querySelector('.next-btn').addEventListener('click', (e) => { e.stopPropagation(); navigateGallery(1); });
+    document.querySelector('.prev-btn').addEventListener('click', (e) => { e.stopPropagation(); navigateGallery(-1); });
+    document.querySelector('.close-btn').addEventListener('click', () => lightbox.style.display = 'none');
+    
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox || e.target === lightbox.querySelector('.lightbox-content') || e.target === lightbox.querySelector('.lightbox-outer-baguette')) {
+        lightbox.style.display = 'none';
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (lightbox.style.display === 'flex') {
+        if (e.key === 'ArrowRight') navigateGallery(1);
+        if (e.key === 'ArrowLeft') navigateGallery(-1);
+        if (e.key === 'Escape') lightbox.style.display = 'none';
+      }
+    });
+  });
+</script>

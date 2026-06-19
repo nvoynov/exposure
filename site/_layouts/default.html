@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Dynamic title: combines page title and site title from _config.yml -->
+  <title>{{ page.title }} | {{ site.title }}</title>
+
+  <!-- Automatic SEO metadata generator (Handles Titles, OpenGraph, Twitter Cards) -->
+  {% seo %}
+  
+  <!-- Injects the Google Analytics switch script -->
+  {% include analytics.html %}
+  
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  
+  <style>
+    /* Minimalist Gallery Style (Light Theme) */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      background-color: #fbfbfb; 
+      color: #1a1a1a;
+      margin: 0;
+      padding: 0;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Top Header Container with Flexbox layout */
+    header {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 1rem 2rem 1rem;
+      display: flex;
+      justify-content: space-between; /* Pushes brand to left and nav to right */
+      align-items: baseline; /* Aligns text baselines perfectly */
+    }
+    
+    header h1 {
+      margin: 0;
+      font-weight: 300;
+      font-size: 1.3rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    header h1 a {
+      color: #000000; /* Max contrast pure black for the brand name */
+      text-decoration: none;
+    }
+    
+    /* Navigation menu links */
+    nav a {
+      color: #444444; /* Proportional contrast lift from #777 to dark graphite */
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    nav a:hover {
+      color: #000000; /* Hover state drops to solid black */
+    }
+    
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+    
+    footer {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: #999;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+      margin-top: 5rem;
+    }
+
+    /* Responsive adjustments for smaller screen resolutions */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column; /* Stacks brand and navigation vertically */
+        align-items: center;    /* Centers elements for mobile viewports */
+        text-align: center;
+        padding-top: 2rem;
+      }
+      header h1 {
+        margin-bottom: 1.5rem;
+        font-size: 1.2rem;
+      }
+      nav a {
+        margin: 0 12px; /* Uniform horizontal spacing for mobile link block */
+      }
+    }
+
+    /* 
+       EDITORIAL TYPOGRAPHY REFINEMENT FOR THE ABOUT PAGE
+       Limits the readable text frame strictly to two-thirds (66%) 
+       of the global desktop container to maintain proper column line lengths.
+    */
+    main h2 {
+      font-weight: 300;
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 0;
+      margin-bottom: 2rem;
+      color: #1a1a1a;
+    }
+
+    main h3 {
+      font-weight: 300;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      margin-top: 3.5rem;
+      margin-bottom: 1.5rem;
+      color: #1a1a1a;
+    }
+
+    main p {
+      color: #444;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      max-width: 66%; /* Restricts body paragraphs to 2/3 width */
+    }
+
+    main hr {
+      border: none;
+      border-top: 1px solid #e5e5e5;
+      margin: 3rem 0;
+      max-width: 66%;
+    }
+
+    main ul {
+      padding-left: 0;
+      font-size: 0.92rem;
+      line-height: 1.8;
+      color: #444;
+      max-width: 66%;
+    }
+    
+    main li {
+      list-style-type: none; /* Removes technical bullet points for an elegant colophon */
+      margin-bottom: 8px;
+    }
+
+    main a {
+      color: #1a1a1a;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.2s;
+    }
+    main a:hover {
+      color: #666;
+    }
+
+    /* Responsive media boundary reset for mobile tablets and devices */
+    @media (max-width: 768px) {
+      main p, main hr, main ul {
+        max-width: 100%; /* Expands back to full width on narrow viewports */
+      }
+    }
+
+    header h1 {
+      margin: 0;
+      font-weight: 300;
+      font-size: 1.3rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    header h1 a {
+      color: #000000; /* Pure black high contrast brand style */
+      text-decoration: none;
+    }
+    
+    nav a {
+      color: #444444; /* Calibrated graphite layout visibility text */
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    nav a:hover {
+      color: #000000;
+    }
+
+    /* 
+       EDITORIAL OVERLAPPING LAYOUT FOR THE ABOUT PAGE
+       Gives text 80% width while the frame sketch acts as a true blind debossing water-mark,
+       partially sitting underneath the right edge of the paragraphs to completely eliminate gaps.
+    */
+    .about-container-layout {
+      position: relative; /* Establishes a solid baseline coordinate context */
+      width: 100%;
+    }
+
+    .about-text-content-block {
+      width: 80%; /* Expanded by 20% to give text ultimate maximum width comfort */
+      position: relative;
+      z-index: 2; /* Keeps the high-contrast text layers strictly readable on top */
+    }
+
+    .about-artwork-blueprint {
+      position: absolute;
+      right: 0;
+      top: -1.5rem;
+      width: 40%;
+      opacity: 0.65; 
+      user-select: none;
+      pointer-events: none;
+      z-index: 1;
+      
+      /* 
+         THE BROKEN AXIS EFFECT:
+         Sets the rotation anchor to the top center (the nail) 
+         and tilts the frame canvas slightly to eliminate static geometry.
+      */
+      transform-origin: top center;
+      transform: rotate(-3.5deg); /* Gentle organic tilt */
+    }
+
+    main h2 {
+      font-weight: 300;
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 0;
+      margin-bottom: 2rem;
+      color: #000000;
+    }
+
+    main h3 {
+      font-weight: 300;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      margin-top: 3.5rem;
+      margin-bottom: 1.5rem;
+      color: #000000;
+    }
+
+    main p {
+      color: #444444;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    main hr {
+      border: none;
+      border-top: 1px solid #e2ded5;
+      margin: 3rem 0;
+    }
+
+    main ul {
+      padding-left: 0;
+      font-size: 0.92rem;
+      line-height: 1.8;
+      color: #444444;
+    }
+    
+    main li {
+      list-style-type: none;
+      margin-bottom: 8px;
+    }
+
+    main a {
+      color: #000000;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.2s;
+    }
+    main a:hover {
+      color: #666666;
+    }
+
+    /* Responsive scaling fallback rules for narrow viewports */
+    @media (max-width: 800px) {
+      .about-container-layout {
+        flex-direction: column-reverse;
+        gap: 3rem;
+      }
+      .about-text-content-block {
+        max-width: 100%;
+      }
+      .about-artwork-blueprint {
+        max-width: 45%;
+        margin: 0 auto;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <!-- Dynamic site title injected straight from _config.yml -->
+    <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
+    <nav>
+      <a href="{{ '/' | relative_url }}">Home</a>
+      <a href="{{ '/series/' | relative_url }}">Series</a>
+      <a href="/about/">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Dynamic page conditional architecture -->
+    {% if page.url == '/about/' %}
+      <div class="about-container-layout">
+        <div class="about-text-content-block">
+          {{ content }}
+        </div>
+        
+        <!-- The hand-drawn blind debossing vector layout -->
+        <div class="about-artwork-blueprint">
+          <svg xmlns="http://w3.org" viewBox="0 0 200 260" fill="none" stroke="#f2ede4" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Outer handmade wood profile lines -->
+            <path d="M 12 14 L 186 12 L 188 246 L 14 248 Z" />
+            <path d="M 16 18 L 182 16 L 184 242 L 18 244 Z" />
+            
+            <!-- Inner asymmetric weighted mat board cut window -->
+            <path d="M 42 45 L 158 43 L 160 195 L 44 198 Z" />
+            
+            <!-- Core beveled card exposure line -->
+            <path d="M 44 47 L 156 45 L 158 193 L 46 196 Z" />
+          </svg>
+        </div>
+      </div>
+    {% else %}
+      <!-- Standard raw rendering for all other website files -->
+      {{ content }}
+    {% endif %}
+  </main>
+
+  <footer>
+    <!-- Ephemeral calendar layout injected dynamically from site configuration -->
+    <p>&copy; {{ "now" | date: "%Y" }} {{ site.author_name }}. All rights reserved.</p>
+    <p style="font-size: 0.75rem; opacity: 0.6; margin-top: 5px;">
+      No images or text on this site may be reproduced or transmitted in any form without prior written permission.
+    </p>
+  </footer>
+
+</body>
+</html>

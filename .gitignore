@@ -1,0 +1,18 @@
+# --- Jekyll temporary build artifacts ---
+site/.jekyll-cache/
+site/.sass-cache/
+site/_site/
+
+# --- Ruby & Bundler environment specs ---
+.bundle/
+vendor/
+Gemfile.lock
+
+# --- System specific overrides & temporary configuration ---
+.env
+local_config.yml
+*.log
+
+# --- OS specific metadata exclusions ---
+.DS_Store
+Thumbs.db

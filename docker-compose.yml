@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  exposure:
+    build: .
+    image: web-exposure:latest
+    # Mounts your local project folder to watch file changes in real-time
+    volumes:
+      - .:/app:Z
+      # Dynamically mounts your external raw photos directory inside the container
+      - ${PHOTOS_SOURCE_PATH}:/data/photos:Z
+    ports:
+      - "4000:4000" # Forwards Jekyll preview server port to localhost
+    environment:
+      - JEKYLL_ENV=development
+      # Tells Rake inside the container where to look for photos without prompting
+      - SOURCE=/data/photos
+    # Keeps the container alive and runs the preview serve command by default
+    command: bundle exec rake site:serve
