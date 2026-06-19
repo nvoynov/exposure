@@ -66,6 +66,10 @@ namespace :site do
       
       # Initialize an ephemeral local git state inside the output tree
       system("git init")
+      
+      # FIX: Force the local ephemeral branch name to be 'main' regardless of OS defaults
+      system("git branch -m main")
+      
       system("git add .")
       
       timestamp = Time.now.strftime("%Y-%m-%d %H:%M:%S")
@@ -74,8 +78,7 @@ namespace :site do
       # Link to the extracted repository origin pointer
       system("git remote add origin #{git_remote}")
       
-      # Force push the compiled branch content straight into the deployment stream
-      # This completely separates your clean Ruby code from raw build metadata
+      # Now pushing local 'main' into remote 'gh-pages' will match perfectly
       system("git push -f origin main:gh-pages")
     end
 

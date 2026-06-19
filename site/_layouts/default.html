@@ -12,7 +12,8 @@
   <!-- Injects the Google Analytics switch script -->
   {% include analytics.html %}
   
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <!-- Fully compliant vector favicon stream that forces Firefox and Tor to accept SVG paths -->
+  <link rel="icon" type="image/svg+xml" sizes="any" href="{{ '/favicon.svg?v=2' | relative_url }}">
   
   <style>
     /* Minimalist Gallery Style (Light Theme) */
@@ -301,13 +302,13 @@
     <nav>
       <a href="{{ '/' | relative_url }}">Home</a>
       <a href="{{ '/series/' | relative_url }}">Series</a>
-      <a href="/about/">About</a>
+      <a href="{{ '/about/' | relative_url }}">About</a>
     </nav>
   </header>
 
   <main>
     <!-- Dynamic page conditional architecture -->
-    {% if page.url == '/about/' %}
+    {% if page.url contains '/about/' %}
       <div class="about-container-layout">
         <div class="about-text-content-block">
           {{ content }}

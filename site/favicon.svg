@@ -1,5 +1,5 @@
-<svg xmlns="http://w3.org" viewBox="0 0 32 32" fill="#1a1a1a">
-  <!-- Solid vector paths for N and V shapes (100% independent from system fonts) -->
-  <path d="M6 7h2.5l7.5 13.5V7h2.5v18h-2.3L8.5 11.2V25H6V7z"/>
-  <path d="M21 7h2.5l3.5 12 3.5-12H33l-5 18h-2.5l-5-18z" transform="translate(-2, 0) scale(0.9)"/>
+<svg xmlns="http://w3.org" viewBox="0 0 32 32" fill="#000000">
+  <!-- Solid, high-contrast typography vector paths for N and V shapes -->
+  <path d="M4 6h3l10 14V6h3v20h-3L7 12v14H4V6z"/>
+  <path d="M19 6h3.5l4.5 13 4.5-13H35l-6 18h-4L19 6z"/>
 </svg>
