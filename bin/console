@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+require 'irb'
+require_relative '../lib/exposure'
+
+puts "========================================================"
+puts "  Exposure Fine-Art Engine Interactive Debug Console   "
+puts "  Version: #{Exposure::VERSION}                        "
+puts "========================================================"
+puts "  Available Namespaces: Exposure, Exposure::Model, Task"
+puts "  Usage Example:"
+puts "    builder = Exposure::Task::BuildGallery.new"
+puts "    gallery = builder.call('/absolute/path/to/source')"
+puts "========================================================"
+puts ""
+
+# Start the interactive IRB session inside the library architecture context
+IRB.start(__FILE__)
