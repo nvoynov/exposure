@@ -176,14 +176,32 @@ namespace :photo do
       readme_path = File.join(series_path, "README.md")
       series_title, series_tags, pure_text_content = parse_pandoc_readme(readme_path, clean_folder_name)
 
+      # Choose the very first chronological photo file as the official Open Graph cover image
+      og_cover_filename = chronological_tif_files.first ? "#{generate_slug(File.basename(chronological_tif_files.first, '.*'))}.webp" : ""
+      og_cover_path = og_cover_filename.empty? ? "" : "/assets/gallery/#{series_slug}/full/#{og_cover_filename}"
+
+      # CONCEPTUAL PLACEHOLDERS LOGIC:
+      # Harvest up to 5 random thumbs from the series. 
+      # If the folder has fewer than 5 photos, gracefully fill the gaps with the blank art sheet.
+      real_series_photos = series_photos_data.sample(5)
+      
+      while real_series_photos.size < 5
+        real_series_photos << {
+          "filename" => "blank_holder.webp",
+          "thumbnail" => "blank_holder.webp",
+          "is_placeholder" => true # Flag indicator to isolate paths in the layout templates
+        }
+      end
+
       front_matter = {
         "layout"         => "series",
         "title"          => series_title,
         "slug"           => series_slug,
         "hidden"         => is_hidden,
-        "tags"           => series_tags, # Injects the parsed tags array into Front Matter
+        "tags"           => series_tags,
+        "image"          => og_cover_path,
         "photos"         => series_photos_data,
-        "preview_photos" => series_photos_data.sample(5)
+        "preview_photos" => real_series_photos # Safely guaranteed to hold exactly 5 entries
       }
 
       File.open(File.join(SERIES_COLLECTION_DIR, "#{series_slug}.md"), "w") do |f|
@@ -203,6 +221,35 @@ namespace :photo do
       File.open(env_file, "w") { |f| f.puts "PHOTOS_SOURCE_PATH=#{source_dir}" }
       
       puts "\n[Config] Directory saved to local_config.yml and .env for future sessions."
+
+      # 5. AUTOMATIC OPEN GRAPH MULTI-SERIES COLLAGE GENERATOR
+      # Dynamically harvests all available thumbnail assets across the entire project
+      # and bakes a fresh 2x2 grid preview matrix for Facebook/Telegram metadata
+      puts "\n[ImageMagick] Compiling dynamic 2x2 mosaic cover for the home page..."
+    
+      all_thumbs_pool = Dir.glob(File.join(ASSETS_DIR, "*", "thumbs", "*.webp"))
+    
+      if all_thumbs_pool.size >= 4
+        # Sample 4 unique random photographs from the entire global archive pool
+        sampled_thumbs = all_thumbs_pool.sample(4)
+      
+        og_cover_dest = File.join(JEKYLL_DIR, "assets", "gallery", "og_cover.jpg")
+        FileUtils.mkdir_p(File.dirname(og_cover_dest))
+      
+        # Montage tool glues 4 images into a square 2x2 matrix with 0px gaps
+        # and resizes the final asset frame into a standard 1200x800 Facebook link spec
+        system("magick", "montage", *sampled_thumbs, 
+               "-tile", "2x2", 
+               "-geometry", "300x200+0+0", 
+               "-resize", "1200x800", 
+               "-quality", "85", 
+               og_cover_dest)
+             
+        puts "  [Created] Dynamic Open Graph cover mosaic saved to site/assets/gallery/og_cover.jpg"
+      else
+        puts "  [Skipped] Not enough localized thumbnail assets (minimum 4 required) to bake a grid cover."
+      end
+
     end
 
     puts "\nSynchronization complete!"

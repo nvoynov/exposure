@@ -86,4 +86,22 @@ This document tracks the architectural progression, design milestones, and engin
 4.  **Blind Debossing Artist Statement:** Completely rebuilt `about.md` to use clean Kramdown Markdown structures without embedded code. Abstracted a hand-drawn vector SVG sketch layout directly into the system template engine. The non-linear blueprint frame is rotated at `-3.5deg` to simulate hanging from a single wire, serving as a subtle watermark layered underneath the text layout.
 5.  **Global Identity Isolation:** Centralized the author's name, geographical location, and email contact links into global `site.*` variables inside `_config.yml`, protecting layout templates from static text duplication.
 6.  **Git Pre-Commit Security Defense:** Wrote an automated shell hook script inside `.git/hooks/pre-commit` backed by execution rights (`chmod +x`). The system intercepts code commitments to the `main` branch and runs `rake site:clean` ahead of sequence, ensuring un-optimized images, cache stacks, or temporary metadata can never leak into the repository.
-7.  **Production Release Execution:** Shifted local repositories over secure SSH protocol anchors (`git@github.com`). Successfully compiled the final deployment bundle under production spec environments and force-pushed it live onto the `gh-pages` tracking node. The photo archive is live, sitemaps are verified, and independent custom Google Analytics streaming metrics are active.
+7.  **Production Release Execution:** Shifted local repositories over secure SSH protocol anchors (`git@github.com`). Successfully compiled the final deployment bundle under production spec environments and force-pushes it live onto the `gh-pages` tracking node. The photo archive is live, sitemaps are verified, and independent custom Google Analytics streaming metrics are active.
+
+---
+
+## Session 5: Deep Linking Infrastructure, Data Isolation & Conceptual Placeholders
+
+### Objectives
+
+*   Implement persistent, granular deep-linking URL schemes for individual photographs.
+*   Mitigate layout broken states caused by low-asset count thresholds in short series.
+*   Refine data privacy parameters and fix cross-browser routing asset collisions.
+
+### Engineering & Architecture Milestones
+
+1.  **Granular Hash Routing Architecture:** Designed a comprehensive inbound and outbound URL interception matrix using native browser `history.replaceState` and `window.location.hash` pipelines. The application now encodes individual filename anchors into the URL string (e.g., `#frame_03`) smoothly during routine gallery browsing without page refreshes.
+2.  **Autonomous Cross-Context Share Generator:** Resolved an architectural routing conflict between the dynamic home mosaic stream and strict collection page layouts. The common lightbox toolbar now intercepts sharing calls (`copy-link-btn`). If triggered from the randomized homepage stream, it programmatically computes the canonical origin, maps the underlying JSON ledger, and bakes an absolute direct pointer to the item's original source series node. Closing the player silently restores the baseline clean page path state.
+3.  **Conceptual Stacking Placeholders:** Built a secure mechanism to defend the cloud-cloud canvas layout from short-series asset starvation. Developed an offline preset generation routine using direct TrueType binary mappings in ImageMagick (`DejaVu-Sans.ttf`) to bake a minimalist fine-art sheet named `blank_holder.webp` displaying the centered text *Awaiting Light*. The Ruby script now runs a padding loop to dynamically stuff arrays up to a strict 5-item threshold using this conceptual canvas if the source folder holds fewer than 5 files.
+4.  **Cross-Browser Absolute Anchors:** Overrode localized browser vector parsing bugs (the Firefox/Tor gray globe error) by switching favicon hooks from technical relative paths to strict absolute URL pipelines (`| absolute_url`) compiled out of the base domain config.
+5.  **Clean Functional Sorting Reconstruct:** Completely eliminated unsafe, volatile in-place mutating arrays (`sort_by!`) inside `rakelib/photo.rake`. Re-engineered the media catalog tracking tree using an immutable functional sequence handler (`sort_by`) driven by EXIF timestamps (`DateTimeOriginal`) or explicit system creation fallbacks (`File.mtime`), securing clean left-to-right chronological reading layers.

@@ -157,6 +157,7 @@ title: Home
         } else {
           const photo = shuffledPool[poolIndex];
           item.className = `mosaic-item ${randomSize}`;
+          
           item.innerHTML = `<img src="${photo.thumbUrl}" alt="" loading="lazy">`;
           
           gridContainer.appendChild(item);
@@ -168,25 +169,23 @@ title: Home
 
           activeStreamPhotos.push(photo);
           
-          // Capture the target context attributes inside click event listener closure scope
           const targetSlug = photo.slug;
           const targetFilename = photo.filename;
           
           item.addEventListener('click', () => {
-            // Locate the target original parent series in the raw configuration dictionary
             const parentAlbum = rawData.find(a => a.album_slug === targetSlug);
             if (!parentAlbum) return;
             
-            // Map the parent photo collection into structured data with pre-built direct absolute URLs
+            // Explicitly pass the source collection spec with the active context flag set to 'home'
             const contextSeriesPhotos = parentAlbum.photos.map(p => ({
               "fullUrl": `${baseUrl}/assets/gallery/${targetSlug}/full/${p.filename}`,
-              "title": p.title
+              "title": p.title,
+              "filename": p.filename,
+              "slug": targetSlug,
+              "context": "home" 
             }));
             
-            // Track down the corresponding index of our clicked file within its original timeline sequence
             const targetFullIndex = parentAlbum.photos.findIndex(p => p.filename === targetFilename);
-            
-            // Launch the common lightbox with full original series array
             window.openLightboxWithIndex(targetFullIndex !== -1 ? targetFullIndex : 0, contextSeriesPhotos);
           });
 
@@ -198,7 +197,6 @@ title: Home
         }
       }
 
-      // Sequential fade-in trigger
       const injectedCards = Array.from(gridContainer.querySelectorAll('.mosaic-item'))
                                  .filter(card => card.style.visibility !== 'hidden');
                                  

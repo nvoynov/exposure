@@ -5,6 +5,11 @@ author_name: Nikolay Voynov
 author_email: nvoynov@gmail.com
 author_location: Kyiv, Ukraine
 
+# GLOBAL OPEN GRAPH SPECIFICATIONS
+# This image will be shown on Facebook when sharing the main home page link
+description: "An open digital archive of curated photographic series exploring landscape geometry, isolation, and light."
+image: "/assets/gallery/og_cover.jpg" # Points to the automatically updated 2x2 compilation file
+
 collections:
   series:
     output: true

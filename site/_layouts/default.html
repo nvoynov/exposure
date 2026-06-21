@@ -12,8 +12,8 @@
   <!-- Injects the Google Analytics switch script -->
   {% include analytics.html %}
   
-  <!-- Fully compliant vector favicon stream that forces Firefox and Tor to accept SVG paths -->
-  <link rel="icon" type="image/svg+xml" sizes="any" href="{{ '/favicon.svg?v=2' | relative_url }}">
+  <!-- Forced absolute URL context to guarantee cross-browser SVG favicon rendering -->
+  <link rel="icon" type="image/svg+xml" sizes="any" href="{{ '/favicon.svg?v=3' | relative_url | absolute_url }}">
   
   <style>
     /* Minimalist Gallery Style (Light Theme) */

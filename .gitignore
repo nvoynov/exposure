@@ -1,7 +1,25 @@
-# --- Jekyll temporary build artifacts ---
+# ====================================================================
+# Web-Exposure Base Git Ignore Specification
+# Prevents binary assets and caches from leaking into the 'main' branch
+# ====================================================================
+
+# 1. System caches and protective local credentials
+.env
+local_config.yml
+.jekyll-metadata
+.bundle/
+vendor/
+Gemfile.lock
+
+# 2. Jekyll localized internal compiler outputs
 site/.jekyll-cache/
 site/.sass-cache/
 site/_site/
+
+# 3. Dynamic photographic content pipeline artifacts
+# Keeps the 'main' branch pure from generated markdown entries and WebP binary assets
+site/_series/*
+site/assets/gallery/*
 
 # --- Ruby & Bundler environment specs ---
 .bundle/

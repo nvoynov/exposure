@@ -8,42 +8,39 @@ permalink: /series/
 
 <div class="collections-sketchbook">
   {% for album in site.series %}
-    <!-- Filter out hidden standalone photo buckets from the public archive feed -->
     {% unless album.hidden == true %}
-      <!-- Added relative_url filter to the series link -->
       <a href="{{ album.url | relative_url }}" class="album-cloud-canvas" aria-label="Open {{ album.title }}">
         
         <div class="cloud-photos-wrapper">
-          {% if album.preview_photos[0] %}
-            <div class="cloud-pic pic-base">
-              <!-- Added relative_url filter to the thumbnail paths -->
-              <img src="{{ '/assets/gallery/' | relative_url }}{{ album.slug }}/thumbs/{{ album.preview_photos[0].filename | replace: '.webp', '_thumb.webp' }}" alt="" loading="lazy">
-            </div>
-          {% endif %}
+          <!-- SLOT 1: Base photo -->
+          {% assign p = album.preview_photos[0] %}
+          <div class="cloud-pic pic-base">
+            <img src="{% if p.is_placeholder %}{{ '/assets/presets/blank_holder.webp' | relative_url }}{% else %}{{ '/assets/gallery/' | relative_url }}{{ album.slug }}/thumbs/{{ p.filename | replace: '.webp', '_thumb.webp' }}{% endif %}" alt="" loading="lazy">
+          </div>
           
-          {% if album.preview_photos[1] %}
-            <div class="cloud-pic pic-offset-one">
-              <img src="{{ '/assets/gallery/' | relative_url }}{{ album.slug }}/thumbs/{{ album.preview_photos[1].filename | replace: '.webp', '_thumb.webp' }}" alt="" loading="lazy">
-            </div>
-          {% endif %}
+          <!-- SLOT 2: Offset photo one -->
+          {% assign p = album.preview_photos[1] %}
+          <div class="cloud-pic pic-offset-one">
+            <img src="{% if p.is_placeholder %}{{ '/assets/presets/blank_holder.webp' | relative_url }}{% else %}{{ '/assets/gallery/' | relative_url }}{{ album.slug }}/thumbs/{{ p.filename | replace: '.webp', '_thumb.webp' }}{% endif %}" alt="" loading="lazy">
+          </div>
 
-          {% if album.preview_photos[2] %}
-            <div class="cloud-pic pic-offset-two">
-              <img src="{{ '/assets/gallery/' | relative_url }}{{ album.slug }}/thumbs/{{ album.preview_photos[2].filename | replace: '.webp', '_thumb.webp' }}" alt="" loading="lazy">
-            </div>
-          {% endif %}
+          <!-- SLOT 3: Offset photo two -->
+          {% assign p = album.preview_photos[2] %}
+          <div class="cloud-pic pic-offset-two">
+            <img src="{% if p.is_placeholder %}{{ '/assets/presets/blank_holder.webp' | relative_url }}{% else %}{{ '/assets/gallery/' | relative_url }}{{ album.slug }}/thumbs/{{ p.filename | replace: '.webp', '_thumb.webp' }}{% endif %}" alt="" loading="lazy">
+          </div>
 
-          {% if album.preview_photos[3] %}
-            <div class="cloud-pic pic-offset-three">
-              <img src="{{ '/assets/gallery/' | relative_url }}{{ album.slug }}/thumbs/{{ album.preview_photos[3].filename | replace: '.webp', '_thumb.webp' }}" alt="" loading="lazy">
-            </div>
-          {% endif %}
+          <!-- SLOT 4: Offset photo three -->
+          {% assign p = album.preview_photos[3] %}
+          <div class="cloud-pic pic-offset-three">
+            <img src="{% if p.is_placeholder %}{{ '/assets/presets/blank_holder.webp' | relative_url }}{% else %}{{ '/assets/gallery/' | relative_url }}{{ album.slug }}/thumbs/{{ p.filename | replace: '.webp', '_thumb.webp' }}{% endif %}" alt="" loading="lazy">
+          </div>
 
-          {% if album.preview_photos[4] %}
-            <div class="cloud-pic pic-offset-four">
-              <img src="{{ '/assets/gallery/' | relative_url }}{{ album.slug }}/thumbs/{{ album.preview_photos[4].filename | replace: '.webp', '_thumb.webp' }}" alt="" loading="lazy">
-            </div>
-          {% endif %}
+          <!-- SLOT 5: Offset photo four -->
+          {% assign p = album.preview_photos[4] %}
+          <div class="cloud-pic pic-offset-four">
+            <img src="{% if p.is_placeholder %}{{ '/assets/presets/blank_holder.webp' | relative_url }}{% else %}{{ '/assets/gallery/' | relative_url }}{{ album.slug }}/thumbs/{{ p.filename | replace: '.webp', '_thumb.webp' }}{% endif %}" alt="" loading="lazy">
+          </div>
         </div>
 
         <div class="cloud-title-block">
