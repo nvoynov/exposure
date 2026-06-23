@@ -105,3 +105,35 @@ This document tracks the architectural progression, design milestones, and engin
 3.  **Conceptual Stacking Placeholders:** Built a secure mechanism to defend the cloud-cloud canvas layout from short-series asset starvation. Developed an offline preset generation routine using direct TrueType binary mappings in ImageMagick (`DejaVu-Sans.ttf`) to bake a minimalist fine-art sheet named `blank_holder.webp` displaying the centered text *Awaiting Light*. The Ruby script now runs a padding loop to dynamically stuff arrays up to a strict 5-item threshold using this conceptual canvas if the source folder holds fewer than 5 files.
 4.  **Cross-Browser Absolute Anchors:** Overrode localized browser vector parsing bugs (the Firefox/Tor gray globe error) by switching favicon hooks from technical relative paths to strict absolute URL pipelines (`| absolute_url`) compiled out of the base domain config.
 5.  **Clean Functional Sorting Reconstruct:** Completely eliminated unsafe, volatile in-place mutating arrays (`sort_by!`) inside `rakelib/photo.rake`. Re-engineered the media catalog tracking tree using an immutable functional sequence handler (`sort_by`) driven by EXIF timestamps (`DateTimeOriginal`) or explicit system creation fallbacks (`File.mtime`), securing clean left-to-right chronological reading layers.
+
+## - 2026-06-23
+
+### Added
+- Integrated full Hexagonal (Ports & Adapters) and Clean Architecture core layers.
+- Introduced `Exposure::Model::Base` implementing reflection API, immutable value 
+  object boundaries, and deep structural data tree serialization.
+- Introduced `Exposure::Builder::Album` and `Exposure::Builder::UserAlbum` 
+  standalone object aggregators utilizing modern Ruby 3.4 `it` block syntax.
+- Introduced `Exposure::Presenter::UserAlbum` for compiling pristine, minimalist 
+  human-readable metadata flat ledgers without structural Symbol points.
+- Introduced `Exposure::Presenter::SiteAlbum` combined with the `SiteAlbum` 
+  Decorator model layer to isolate and synthesize release monolithic Jekyll pages.
+- Created `rakelib/gallery.rake` containing the isolated clean `:gallery` namespace 
+  with a fail-fast OS binaries validation check hook stream.
+- Implemented an interactive terminal Setup Wizard for configuring and caching 
+  baseline file locations into an immutable `Exposure::ConfigData` instance.
+
+### Changed
+- Shifted the entire engine from loose procedural scripts to a decoupled, 
+  highly testable, immutable Domain-Driven pipeline architecture.
+- Refactored `Exposure::Config` into a thread-safe proxy Singleton delegating 
+  parameters directly onto freeze-protected value objects.
+- Normalized image timestamps processing to rely exclusively on strict web 
+  standards via `DateTime.strptime` and `Time.iso8601` with time-zones retention.
+- Re-aligned the main web header layout container layout to follow a minimalist, 
+  axial museum-style central composition context.
+
+### Removed
+- Fully deleted the legacy monolithic procedural script `rakelib/photo.rake`.
+- Discarded duplicate text-generation variables from Use Case interactors.
+

@@ -12,24 +12,17 @@ layout: default
     <div class="album-editorial-block">
       <div class="album-text-content">
         {{ content }}
-        
-        {% if page.tags and page.tags.size > 0 %}
-          <div class="series-meta-tags">
-            {% for tag in page.tags %}
-              <span class="meta-tag-item">#{{ tag }}</span>
-            {% endfor %}
-          </div>
-        {% endif %}
       </div>
     </div>
 
     <!-- Individual Photo Tiles -->
     {% for photo in page.photos %}
+      {% assign clean_name = photo.filename | replace: '.webp', '' %}
       <div class="photo-item" 
            data-index="{{ forloop.index0 }}"
            data-full="{{ '/assets/gallery/' | relative_url }}{{ page.slug }}/full/{{ photo.filename }}"
-           data-title="{% if photo.title != photo.filename and photo.title != "" %}{{ photo.title }}{% endif %}">
-        <img src="{{ '/assets/gallery/' | relative_url }}{{ page.slug }}/thumbs/{{ photo.thumbnail }}" alt="{{ photo.title }}" loading="lazy">
+           data-title="{% if photo.title != photo.filename and photo.title != '' %}{{ photo.title }}{% endif %}">
+        <img src="{{ '/assets/gallery/' | relative_url }}{{ page.slug }}/thumbs/{{ clean_name }}_thumb.webp" alt="{{ photo.title }}" loading="lazy">
       </div>
     {% endfor %}
   </div>

@@ -1,5 +1,6 @@
 require_relative 'tasks/build_album'
 require_relative 'tasks/build_gallery'
+require_relative 'tasks/build_site_album'
 require_relative 'tasks/build_site'
 
 module Exposure

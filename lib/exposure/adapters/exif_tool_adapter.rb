@@ -7,17 +7,30 @@ module Exposure
 
     # Infrastructure adapter executing native ExifTool CLI batch processing streams
     class ExifToolAdapter < Ports::ExifMetadata
+
+      def initialize
+        # Verify if the target binary is installed and executable in the system
+        unless system("command -v exiftool >/dev/null 2>&1")
+          raise RuntimeError, "ExifTool CLI dependency is missing in this OS!"
+        end
+      end
+
       # @see Exposure::Ports::ExifMetadata#extract
       def extract(album_path, filenames)
         catalog = {}
         return catalog if filenames.to_a.empty?
 
-        # Batch query matching files inside target directory bounds efficiently
+        # 1. Extract and split the formats string from singleton config safely
+        formats = Exposure::Config.instance.supported_formats.split(',')
+
+        # 2. Build explicit separate -ext flags for each format to satisfy ExifTool
+        ext_flags = formats.flat_map { ["-ext", it] }
+
+        # 3. Construct the clean execution array matrix avoiding shell expansion bugs
         cmd = [
           "exiftool", "-json",
-          "-DateTimeOriginal", "-Title", "-Description",
-          File.join(album_path, "*.{tif,tiff,TIF,TIFF}")
-        ]
+          "-DateTimeOriginal", "-Title", "-Description"
+        ] + ext_flags + [album_path]
 
         raw_json = IO.popen(cmd, "r") { it.read }
         return catalog if raw_json.to_s.empty?
@@ -43,6 +56,7 @@ module Exposure
         puts "[Warning] ExifToolAdapter pipeline failed: #{e.message}"
         catalog
       end
-    end
+
+    end   
   end
 end

@@ -1,0 +1,341 @@
+/* Minimalist Gallery Style (Light Theme) */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  background-color: #fbfbfb; 
+  color: #1a1a1a;
+  margin: 0;
+  padding: 0;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Top Header Container with Flexbox layout */
+header {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 1rem 2rem 1rem;
+  display: flex;
+  justify-content: space-between; /* Pushes brand to left and nav to right */
+  align-items: baseline; /* Aligns text baselines perfectly */
+}
+
+header h1 {
+  margin: 0;
+  font-weight: 300;
+  font-size: 1.3rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+header h1 a {
+  color: #000000; /* Max contrast pure black for the brand name */
+  text-decoration: none;
+}
+
+/* Navigation menu links */
+nav a {
+  color: #444444; /* Proportional contrast lift from #777 to dark graphite */
+  text-decoration: none;
+  margin-left: 25px;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+nav a:hover {
+  color: #000000; /* Hover state drops to solid black */
+}
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+footer {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #999;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  margin-top: 5rem;
+}
+
+/* Responsive adjustments for smaller screen resolutions */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column; /* Stacks brand and navigation vertically */
+    align-items: center;    /* Centers elements for mobile viewports */
+    text-align: center;
+    padding-top: 2rem;
+  }
+  header h1 {
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+  }
+  nav a {
+    margin: 0 12px; /* Uniform horizontal spacing for mobile link block */
+  }
+}
+
+/* 
+   EDITORIAL TYPOGRAPHY REFINEMENT FOR THE ABOUT PAGE
+   Limits the readable text frame strictly to two-thirds (66%) 
+   of the global desktop container to maintain proper column line lengths.
+*/
+main h2 {
+  font-weight: 300;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  color: #1a1a1a;
+}
+
+main h3 {
+  font-weight: 300;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  margin-top: 3.5rem;
+  margin-bottom: 1.5rem;
+  color: #1a1a1a;
+}
+
+main p {
+  color: #444;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  max-width: 66%; /* Restricts body paragraphs to 2/3 width */
+}
+
+main hr {
+  border: none;
+  border-top: 1px solid #e5e5e5;
+  margin: 3rem 0;
+  max-width: 66%;
+}
+
+main ul {
+  padding-left: 0;
+  font-size: 0.92rem;
+  line-height: 1.8;
+  color: #444;
+  max-width: 66%;
+}
+
+main li {
+  list-style-type: none; /* Removes technical bullet points for an elegant colophon */
+  margin-bottom: 8px;
+}
+
+main a {
+  color: #1a1a1a;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+main a:hover {
+  color: #666;
+}
+
+/* Responsive media boundary reset for mobile tablets and devices */
+@media (max-width: 768px) {
+  main p, main hr, main ul {
+    max-width: 100%; /* Expands back to full width on narrow viewports */
+  }
+}
+
+header h1 {
+  margin: 0;
+  font-weight: 300;
+  font-size: 1.3rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+header h1 a {
+  color: #000000; /* Pure black high contrast brand style */
+  text-decoration: none;
+}
+
+nav a {
+  color: #444444; /* Calibrated graphite layout visibility text */
+  text-decoration: none;
+  margin-left: 25px;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+nav a:hover {
+  color: #000000;
+}
+
+/* 
+   EDITORIAL OVERLAPPING LAYOUT FOR THE ABOUT PAGE
+   Gives text 80% width while the frame sketch acts as a true blind debossing water-mark,
+   partially sitting underneath the right edge of the paragraphs to completely eliminate gaps.
+*/
+.about-container-layout {
+  position: relative; /* Establishes a solid baseline coordinate context */
+  width: 100%;
+}
+
+.about-text-content-block {
+  width: 80%; /* Expanded by 20% to give text ultimate maximum width comfort */
+  position: relative;
+  z-index: 2; /* Keeps the high-contrast text layers strictly readable on top */
+}
+
+.about-artwork-blueprint {
+  position: absolute;
+  right: 0;
+  top: -1.5rem;
+  width: 40%;
+  opacity: 0.65; 
+  user-select: none;
+  pointer-events: none;
+  z-index: 1;
+  
+  /* 
+     THE BROKEN AXIS EFFECT:
+     Sets the rotation anchor to the top center (the nail) 
+     and tilts the frame canvas slightly to eliminate static geometry.
+  */
+  transform-origin: top center;
+  transform: rotate(-3.5deg); /* Gentle organic tilt */
+}
+
+main h2 {
+  font-weight: 300;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  color: #000000;
+}
+
+main h3 {
+  font-weight: 300;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  margin-top: 3.5rem;
+  margin-bottom: 1.5rem;
+  color: #000000;
+}
+
+main p {
+  color: #444444;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+main hr {
+  border: none;
+  border-top: 1px solid #e2ded5;
+  margin: 3rem 0;
+}
+
+main ul {
+  padding-left: 0;
+  font-size: 0.92rem;
+  line-height: 1.8;
+  color: #444444;
+}
+
+main li {
+  list-style-type: none;
+  margin-bottom: 8px;
+}
+
+main a {
+  color: #000000;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+main a:hover {
+  color: #666666;
+}
+
+/* site/assets/css/style.css */
+
+/* Core Header Container: Strict Axial Museum Center Alignment */
+.site-header {
+  display: flex !important;
+  flex-direction: column !important; /* Force items to stack vertically */
+  align-items: center !important;    /* Force strict horizontal center */
+  text-align: center !important;
+  padding: 40px 20px 20px 20px !important;
+  border-bottom: 1px solid #f0f0f0 !important;
+  margin-bottom: 40px !important;
+  width: 100% !important;
+}
+
+/* Master Title Typography Block */
+.site-title {
+  margin-bottom: 20px !important; /* White space breathing room before links */
+}
+
+.site-title h1 {
+  font-size: 24px !important;
+  font-weight: 300 !important;
+  letter-spacing: 2px !important;
+  margin: 0 !important;
+}
+
+.site-title a {
+  text-decoration: none !important;
+  color: #111111 !important;
+}
+
+/* Navigation Links Row Matrix */
+.site-nav {
+  display: flex !important;
+  flex-direction: row !important; /* Force links to stay on a single line */
+  justify-content: center !important;
+  gap: 30px !important; /* Elegant uniform distance between navigation items */
+}
+
+.nav-link {
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  letter-spacing: 1.5px !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  color: #777777 !important;
+  transition: color 0.2s ease !important;
+}
+
+.nav-link:hover {
+  color: #111111 !important;
+}
+
+/* Mobile Viewports Optimization Bounding Box (Max Width 768px) */
+@media (max-width: 768px) {
+  /* Tighten global margins for tight compact phone grids */
+  .series-preview-cloud {
+    position: relative;
+    height: 220px !important; /* Forces strict container lock boundary */
+    margin-bottom: 30px !important;
+  }
+
+  /* Reset separate rows: pack all 5 print plates into a tight fan stack */
+  .series-preview-cloud .cloud-photo {
+    position: absolute !important;
+    width: 65% !important; /* Balanced scale on narrow screens */
+    height: auto !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+  }
+
+  /* Define exact ювелирные micro-offsets for the mobile fan layer array */
+  .series-preview-cloud .cloud-photo:nth-child(1) { left: 5%;  top: 0;    z-index: 1; }
+  .series-preview-cloud .cloud-photo:nth-child(2) { left: 12%; top: 10px; z-index: 2; }
+  .series-preview-cloud .cloud-photo:nth-child(3) { left: 19%; top: 20px; z-index: 3; }
+  .series-preview-cloud .cloud-photo:nth-child(4) { left: 26%; top: 30px; z-index: 4; }
+  .series-preview-cloud .cloud-photo:nth-child(5) { left: 33%; top: 40px; z-index: 5; }
+}
+

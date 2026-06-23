@@ -1,36 +1,34 @@
 require_relative 'base'
-require_relative 'titled_tagged'
+require_relative 'description'
 
 module Exposure
   module Model
 
-    # Pure domain class representing an immutable fine-art photographic print record
+    # Pure domain class representing an immutable fine-art photographic record
     class Image < Base
-      include TitledTagged
+      include Description
 
       # @!attribute [r] filename
-      #   @return [String] unique asset target filename slug (e.g., "frame_01.webp")
+      #   @return [String] unique asset target filename slug
       attr_reader :filename
 
       # @!attribute [r] created_at
       #   @return [Time] clean domain chronological metric representation
       attr_reader :created_at
 
-      # @param filename [String] target asset filename slug
-      # @param title [String] artistic name or fallback designation
-      # @param description [String] editorial text notes or stories
-      # @param tags [Array<String>] search keywords semantic index
-      # @param created_at [Time] clean domain chronological metric representation
-      def initialize(filename:, title:, description:, tags:, created_at:)
-        @filename = filename
-        @title = title
+      def initialize(filename:, title:, description:, keywords:, genre:,
+                     location:, created_at:)
+        @filename    = filename
+        @title       = title
         @description = description
-        @tags = tags
-        @created_at = created_at
+        @keywords    = keywords
+        @genre       = genre
+        @location    = location
+        @created_at  = created_at
 
-        # Enforce strict domain immutability layer to prevent state mutations
         freeze
       end
+
     end
   end
 end
