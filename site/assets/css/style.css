@@ -313,29 +313,47 @@ main a:hover {
   color: #111111 !important;
 }
 
-/* Mobile Viewports Optimization Bounding Box (Max Width 768px) */
+/* ==========================================================================
+   PRODUCTION RESPONSIVE MOBILE OPTIMIZATION LAYER
+   ========================================================================== */
+
 @media (max-width: 768px) {
-  /* Tighten global margins for tight compact phone grids */
-  .series-preview-cloud {
-    position: relative;
-    height: 220px !important; /* Forces strict container lock boundary */
+  /* 1. RESTORE ALBUM LAYOUT: Absolutely guarantee all photos stay visible */
+  .album-editorial-flow {
+    display: flex !important;
+    flex-direction: column !important; /* Stack context text and grids vertically */
+    height: auto !important; /* Restore natural height fluid bounds */
+    position: static !important;
+  }
+
+  .album-editorial-flow .photo-item {
+    position: static !important;
+    width: 100% !important; /* Individual prints take full width on phone screen */
+    height: auto !important;
     margin-bottom: 30px !important;
   }
 
-  /* Reset separate rows: pack all 5 print plates into a tight fan stack */
-  .series-preview-cloud .cloud-photo {
-    position: absolute !important;
-    width: 65% !important; /* Balanced scale on narrow screens */
-    height: auto !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    transition: transform 0.3s ease;
+  /* 2. FIX SERIES CLOUD: Pack exactly 5 preview cards into a tight stack */
+  .series-preview-cloud {
+    display: block !important;
+    position: relative !important;
+    height: 280px !important; /* Forces strict window lock boundary */
+    width: 100% !important;
+    margin: 20px 0 50px 0 !important;
   }
 
-  /* Define exact ювелирные micro-offsets for the mobile fan layer array */
-  .series-preview-cloud .cloud-photo:nth-child(1) { left: 5%;  top: 0;    z-index: 1; }
-  .series-preview-cloud .cloud-photo:nth-child(2) { left: 12%; top: 10px; z-index: 2; }
-  .series-preview-cloud .cloud-photo:nth-child(3) { left: 19%; top: 20px; z-index: 3; }
-  .series-preview-cloud .cloud-photo:nth-child(4) { left: 26%; top: 30px; z-index: 4; }
-  .series-preview-cloud .cloud-photo:nth-child(5) { left: 33%; top: 40px; z-index: 5; }
-}
+  /* Target ANY image element inside the cloud container directly */
+  .series-preview-cloud img {
+    position: absolute !important;
+    width: 65% !important; /* Balanced scale on narrow viewports */
+    height: auto !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12) !important;
+    transition: transform 0.3s ease !important;
+  }
 
+  /* Enforce exact micro-offsets stack order using child indexation */
+  .series-preview-cloud img:nth-child(1) { left: 4%;  top: 0;     z-index: 1; }
+  .series-preview-cloud img:nth-child(2) { left: 10%; top: 16px;  z-index: 2; }
+  .series-preview-cloud img:nth-child(3) { left: 16%; top: 32px;  z-index: 3; }
+  .series-preview-cloud img:nth-child(4) { left: 22%; top: 48px;  z-index: 4; }
+  .series-preview-cloud img:nth-child(5) { left: 28%; top: 64px;  z-index: 5; }

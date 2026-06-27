@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
+gem 'date'
 gem "rake", "~> 13.1"
 gem "faraday-retry" # Silences the Faraday middleware warnings
 

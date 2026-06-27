@@ -1,5 +1,5 @@
 # Use the official slim Ruby image to keep the footprint small
-FROM ruby:3.2-slim
+FROM ruby:3.4-slim
 
 # Install system dependencies: build tools, ImageMagick, and ExifTool
 RUN apt-get update && apt-get install -y --no-install-recommends \

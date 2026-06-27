@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="480" viewBox="0 0 720 480">
+  <!-- Content area background wireframe -->
+  <rect width="720" height="480" fill="#FFFFFF" />
+
+  <!-- 1) Page Title -->
+  <text x="40" y="50" font-family="sans-serif" font-size="22" font-weight="600" fill="#111111">[ ABOUT ME ]</text>
+
+  <!-- 2) Biography and Concept text (Left Column, width ~ 65%) -->
+  <g transform="translate(40, 90)">
+    <!-- Paragraph 1: Introduction (Abstracted author metadata) -->
+    <text x="0" y="15" font-family="sans-serif" font-size="12" font-weight="bold" letter-spacing="0.5" fill="#444444">[ AUTHOR NAME / ARTIST ]</text>
+    <text x="0" y="40" font-family="sans-serif" font-size="11" fill="#666666">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</text>
+    <text x="0" y="60" font-family="sans-serif" font-size="11" fill="#666666">eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut</text>
+    <text x="0" y="80" font-family="sans-serif" font-size="11" fill="#666666">enim ad minim veniam, quis nostrud exercitation ullamco laboris</text>
+    <text x="0" y="100" font-family="sans-serif" font-size="11" fill="#666666">nisi ut aliquip ex ea commodo consequat.</text>
+
+    <!-- Paragraph 2: Artistic Vision -->
+    <text x="0" y="140" font-family="sans-serif" font-size="11" fill="#666666">Duis aute irure dolor in reprehenderit in voluptate velit esse</text>
+    <text x="0" y="160" font-family="sans-serif" font-size="11" fill="#666666">cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat</text>
+    <text x="0" y="180" font-family="sans-serif" font-size="11" fill="#666666">cupidatat non proident, sunt in culpa qui officia deserunt mollit</text>
+    <text x="0" y="200" font-family="sans-serif" font-size="11" fill="#666666">anim id est laborum. Free your attention. Take it in. Enter the scene...</text>
+
+    <!-- Paragraph 3: Contacts / External links outline -->
+    <text x="0" y="250" font-family="sans-serif" font-size="11" font-weight="bold" fill="#444444">Connect:</text>
+    <text x="0" y="270" font-family="sans-serif" font-size="11" fill="#777777">[ Email Placeholder ]   ·   [ Instagram ]   ·   [ Telegram ]</text>
+  </g>
+
+  <!-- 3) Right Column: Compact Camera Lens Graphic / Avatar Placeholder -->
+  <g transform="translate(520, 90)">
+    <!-- Compact background boundary square for the avatar image card -->
+    <rect x="0" y="0" width="160" height="160" fill="none" stroke="#EAEAEA" stroke-width="1" rx="4" />
+    
+    <!-- Compact Camera Lens Concept Avatar -->
+    <g transform="translate(80, 80)" fill="none" stroke="#CCCCCC" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Outer lens barrel -->
+      <circle cx="0" cy="0" r="40" stroke-width="1" />
+      <circle cx="0" cy="0" r="35" stroke-width="1.2" stroke-dasharray="2,2" />
+      
+      <!-- Focus ring grip lines -->
+      <circle cx="0" cy="0" r="30" stroke-width="1.5" />
+      
+      <!-- Lens glass elements reflections -->
+      <circle cx="0" cy="0" r="18" stroke-width="1" />
+      <circle class="lens-reflection" cx="-5" cy="-5" r="4" stroke="none" fill="#EEEEEE" />
+      
+      <!-- Conceptual aperture blades sketches -->
+      <line x1="-12" y1="-13" x2="-6" y2="-17" stroke-width="1" />
+      <line x1="13" y1="-12" x2="17" y2="-6" stroke-width="1" />
+      <line x1="12" y1="13" x2="6" y2="17" stroke-width="1" />
+      <line x1="-13" y1="12" x2="-17" y2="6" stroke-width="1" />
+    </g>
+    
+    <!-- Meta subtext for the compact avatar area -->
+    <text x="80" y="185" font-family="sans-serif" font-size="11" text-anchor="middle" fill="#888888">[ AUTHOR AVATAR ]</text>
+    <text x="80" y="200" font-family="sans-serif" font-size="9" text-anchor="middle" fill="#B2B2B2">(Camera Lens Placeholder)</text>
+  </g>
+</svg>

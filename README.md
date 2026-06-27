@@ -6,7 +6,9 @@
 
 A minimalist, containerized static website engine and asset optimization pipeline built for photographic series.
 
-Inspired by the cinematic, non-linear exhibition layouts of contemporary art photography, **web-exposure** acts as a silent digital passepartout canvas. It completely separates your raw production tools from the clean, static HTML deliverables deployed to GitHub Pages.
+Inspired by the cinematic, non-linear exhibition layouts of contemporary art photography, **exposure** acts as a silent digital passepartout canvas. It completely separates your raw production tools from the clean, static HTML deliverables deployed to GitHub Pages.
+
+Initial intent of the project can be get in [Specification](/docs/SPEC.md)
 
 ---
 
@@ -77,8 +79,124 @@ All routine deployment and management behaviors are managed via the `rake` suite
 
 ---
 
-## Colophon & Credits
+## Structure
 
-*   **Concept, Curation & Photography:** Nikolay Voynov
-*   **Co-Developer & Technical Architect:** Gemini AI (Google)
-*   **Core Systems:** Driven by Jekyll, Ruby Rake automation, and Imagemagick/ExifTool CLI suites.
+The project repository structure
+
+
+.
+├── bin
+│   └── console
+├── CHANGELOG.md
+├── docker-compose.yml
+├── Dockerfile
+├── docs
+│   ├── assets (documentations assets)
+│   │   ├── about_view.svg
+│   │   ├── album_view.svg
+│   │   ├── lightbox_view.svg
+│   │   ├── main_layout.svg
+│   │   ├── main_portfolio_view.svg
+│   │   ├── series_view.svg
+│   │   └── uikit_demo.svg
+│   ├── SPEC.md (started software requirements specfication, mainly to fully expand the context of the project)
+│   └── UI_UX_SPEC.md
+├── Gemfile
+├── Gemfile.lock
+├── guides (preserves hlpful AI information)
+│   ├── ALBUM_PRESENTATION_GUIDE.md
+│   └── DESIGN-PRINCIPLES.md
+├── HISTORY.md (contains the very first AI sessions log)
+├── lib
+│   ├── exposure
+│   │   ├── adapters
+│   │   │   ├── exif_tool_adapter.rb
+│   │   │   └── image_magick_adapter.rb
+│   │   ├── adapters.rb
+│   │   ├── basic
+│   │   │   └── time_extentions.rb
+│   │   ├── basic.rb
+│   │   ├── builder
+│   │   │   ├── album.rb
+│   │   │   ├── base.rb
+│   │   │   └── user_album.rb
+│   │   ├── builder.rb
+│   │   ├── config.rb
+│   │   ├── decorator
+│   │   │   └── site_album.rb
+│   │   ├── decorator.rb
+│   │   ├── model
+│   │   │   ├── album.rb
+│   │   │   ├── base.rb
+│   │   │   ├── description.rb
+│   │   │   ├── gallery.rb
+│   │   │   └── image.rb
+│   │   ├── model.rb
+│   │   ├── ports
+│   │   │   ├── exif_metadata.rb
+│   │   │   └── image_transformation.rb
+│   │   ├── ports.rb
+│   │   ├── presenter
+│   │   │   ├── base.rb
+│   │   │   ├── site_album.rb
+│   │   │   └── user_album.rb
+│   │   ├── presenter.rb
+│   │   ├── tasks
+│   │   │   ├── build_album.rb
+│   │   │   ├── build_gallery.rb
+│   │   │   ├── build_site_album.rb
+│   │   │   └── build_site.rb
+│   │   ├── tasks.rb
+│   │   └── version.rb
+│   └── exposure.rb
+├── local_config.yml
+├── Rakefile
+├── rakelib
+│   ├── gallery.rake
+│   └── site.rake
+├── README.md
+├── resume-to-start.md
+├── site
+│   ├── about.md
+│   ├── assets
+│   │   ├── css
+│   │   │   ├── main.scss
+│   │   │   └── style.css
+│   │   ├── gallery
+│   │   └── presets
+│   │       └── blank_holder.webp
+│   ├── _config.yml
+│   ├── _data
+│   ├── _drafts
+│   ├── favicon.svg
+│   ├── focusing_screen.svg
+│   ├── focusing_screen_tight.svg
+│   ├── focus.svg
+│   ├── _includes
+│   │   ├── analytics.html
+│   │   └── lightbox.html
+│   ├── index.md
+│   ├── _layouts
+│   │   ├── default.html
+│   │   └── series.html
+│   ├── _posts
+│   ├── robots.txt
+│   ├── _sass
+│   │   └── base.scss
+│   ├── _series
+│   │   ├── almaznoe.md
+│   │   ├── bubbles.md
+│   │   ├── svalovichi.md
+│   │   └── vaseline.md
+│   └── series.md
+├── TODO.md (latest plans for the project advancement)
+
+
+## Design
+
+TODO: desing Architecture Design Document docs/ARCH.md and provide link
+
+## Other techs
+
+- Yard ruby documentation tool
+- Jekyll and Github Pages

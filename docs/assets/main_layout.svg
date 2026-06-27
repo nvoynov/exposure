@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <!-- Background wireframe canvas -->
+  <rect width="800" height="600" fill="#FAFAFA" />
+  
+  <!-- HEADER SECTION -->
+  <text x="400" y="40" font-family="sans-serif" font-size="20" font-weight="300" letter-spacing="2" text-anchor="middle" fill="#111111">[ SITE TITLE / HEADER ]</text>
+  
+  <!-- NAVIGATION LINKS -->
+  <text x="400" y="70" font-family="sans-serif" font-size="12" letter-spacing="1" text-anchor="middle" fill="#777777">[ NAV LINK 1 ]   .   [ NAV LINK 2 ]   .   [ NAV LINK 3 ]</text>
+  
+  <!-- Top header separator line -->
+  <line x1="40" y1="90" x2="760" y2="90" stroke="#EAEAEA" stroke-width="1" />
+  
+  <!-- CONTENT AREA (Abstract page layout placeholder) -->
+  <!-- Wireframe container for dynamic page views -->
+  <rect x="40" y="120" width="720" height="400" fill="#FFFFFF" stroke="#DDDDDD" stroke-width="1" stroke-dasharray="4,4" rx="4" />
+  <text x="400" y="315" font-family="sans-serif" font-size="14" font-weight="400" letter-spacing="1" text-anchor="middle" fill="#888888">[ ABSTRACT PAGE VIEW PLACEHOLDER ]</text>
+  <text x="400" y="340" font-family="sans-serif" font-size="11" text-anchor="middle" fill="#B2B2B2">(Main Series / Photo Feed / About Me Content)</text>
+
+  <!-- FOOTER SECTION -->
+  <!-- Bottom footer separator line -->
+  <line x1="40" y1="540" x2="760" y2="540" stroke="#EAEAEA" stroke-width="1" />
+  
+  <!-- Footer copyright notice -->
+  <text x="400" y="565" font-family="sans-serif" font-size="11" letter-spacing="0.5" text-anchor="middle" fill="#777777">© 2026 Nikolay Voynov. All rights reserved.</text>
+</svg>
