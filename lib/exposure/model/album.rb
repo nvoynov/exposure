@@ -64,9 +64,8 @@ module Exposure
         current_filenames = @images.map(&:filename)
         saved_filenames   = saved.images.map(&:filename)
         
-        # Keep author's custom storyboard sequence but append brand new disk files
-        orphans = current_filenames - saved_filenames
-        final_sequence = saved_filenames + orphans
+        # Chronologically interleave newly discovered drive files into user sequence
+        final_sequence = interleave_orphans(current_filenames, saved_filenames, saved)
 
         merged_images = final_sequence.map do |fname|
           fresh_img = @images.find { |it| it.filename == fname }
@@ -80,11 +79,11 @@ module Exposure
             # Prioritize author's manual text parameters over raw file defaults
             Model::Image.new(
               filename:    fname,
-              title:       saved_img.title || fresh_img.title,
-              description: saved_img.description || fresh_img.description,
-              keywords:    saved_img.keywords || fresh_img.keywords,
-              genre:       saved_img.genre || fresh_img.genre,
-              location:    saved_img.location || fresh_img.location,
+              title:       saved_img.title.to_s.empty? ? fresh_img.title : saved_img.title,
+              description: saved_img.description.to_s.empty? ? fresh_img.description : saved_img.description,
+              keywords:    saved_img.keywords.to_s.empty? ? fresh_img.keywords : saved_img.keywords,
+              genre:       saved_img.genre.to_s.empty? ? fresh_img.genre : saved_img.genre,
+              location:    saved_img.location.to_s.empty? ? fresh_img.location : saved_img.location,
               created_at:  fresh_img.created_at
             )
           end
@@ -96,14 +95,42 @@ module Exposure
           slug:        saved.slug || @slug,
           title:       saved.title || @title,
           description: saved.description || @description,
-          story:       saved.story.empty? ? @story : saved.story,
-          keywords:    saved.keywords.empty? ? @keywords : saved.keywords,
+          story:       saved.story.to_s.empty? ? @story : saved.story,
+          keywords:    saved.keywords.to_s.empty? ? @keywords : saved.keywords,
           genre:       saved.genre || @genre,
           location:    saved.location || @location,
           cover:       saved.cover || @cover,
           images:      merged_images,
           hidden:      saved.hidden == true
         )
+      end
+
+      private
+
+      # Interleaves newly discovered assets into the author's storyboard sequence based on creation time
+      # @return [Array<String>] combined list of target filenames
+      def interleave_orphans(current_filenames, saved_filenames, saved)
+        orphan_filenames = current_filenames - saved_filenames
+        orphan_images    = @images.select { |img| orphan_filenames.include?(img.filename) }
+        sorted_orphans   = orphan_images.sort_by(&:created_at)
+
+        sequence = saved_filenames.dup
+
+        sorted_orphans.each do |orphan|
+          target_index = sequence.find_index do |fname|
+            existing_img = @images.find { |it| it.filename == fname } || 
+                           saved.images.find { |it| it.filename == fname }
+            existing_img && existing_img.created_at > orphan.created_at
+          end
+
+          if target_index
+            sequence.insert(target_index, orphan.filename)
+          else
+            sequence << orphan.filename
+          end
+        end
+
+        sequence
       end
 
     end

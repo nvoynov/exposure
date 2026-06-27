@@ -357,3 +357,24 @@ main a:hover {
   .series-preview-cloud img:nth-child(3) { left: 16%; top: 32px;  z-index: 3; }
   .series-preview-cloud img:nth-child(4) { left: 22%; top: 48px;  z-index: 4; }
   .series-preview-cloud img:nth-child(5) { left: 28%; top: 64px;  z-index: 5; }
+
+/* Update the main site title link to align items like a pro */
+.site-title h1 a {
+  display: inline-flex !important;
+  align-items: center !important;  /* Strict mathematical & vertical center centering */
+  justify-content: center !important;
+  text-decoration: none !important;
+  color: #111111 !important;
+}
+
+/* Updated header divider icon rule */
+.header-divider-icon {
+  display: block !important;       /* Block inside flex container prevents alignment lock */
+  height: 1rem !important;          /* Perfect scalable scale matching your uppercase font height */
+  width: auto !important;
+  margin: 0 0.7rem !important;     /* Clean negative space gaps */
+  opacity: 0.85 !important;
+  
+  /* Hard offset adjustment if optical illusion still feels high */
+  margin-top: 2px !important;      
+}

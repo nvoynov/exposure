@@ -1,3 +1,6 @@
+# lib/exposure/presenter/user_album.rb
+# frozen_string_literal: true
+
 require_relative 'base'
 
 module Exposure
@@ -5,19 +8,6 @@ module Exposure
 
     # Presents the Album model into twin human-editable author configuration files
     class UserAlbum < Base
-
-      # Centralized presentation guideline embedded directly as HTML comment
-      GUIDELINE = <<~HTML.freeze
-        <!--
-        # -------------------------------------------------------------------
-        # ARTIST MANIFESTO WORKSPACE
-        # -------------------------------------------------------------------
-        # Write your extensive creative narrative, exhibition background,
-        # or standalone conceptual photography stories in the text area below.
-        # To configure individual photo captions, use the ALBUM.yml file.
-        # -------------------------------------------------------------------
-        -->
-      HTML
 
       # @param album [Model::Album] immutable domain aggregate instance
       # @return [Hash<Symbol, String>] serialized contents for MD and YML files
@@ -38,11 +28,17 @@ module Exposure
         end
 
         # Strip any existing old title headers from the raw story body text
-        story_body = album.story.lines.reject { |l| l.start_with?("%") }.join.strip
+        story_body = album.story.to_s.lines.reject { |l| l.start_with?("%") }.join.strip
         human_md_meta = md_meta.transform_keys(&:to_s)
 
+        # Grab the centrally configured guideline string from Config instance
+        guideline = Exposure::Config.instance.album_manifesto_guideline
+
+        # If the author haven't written anything yet, provide the template
+        final_story = story_body.empty? ? guideline.strip : story_body
+
         {
-          md_content:  "#{YAML.dump(human_md_meta)}---\n\n#{GUIDELINE}\n#{story_body}\n",
+          md_content:  "#{YAML.dump(human_md_meta)}---\n\n#{final_story}\n",
           yml_content: YAML.dump({ "images" => formatted_images })
         }
       end

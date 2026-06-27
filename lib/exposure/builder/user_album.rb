@@ -15,8 +15,7 @@ module Exposure
       def call(md_content:, yml_content:, dirname:)
         md_parts = md_content.split("---")
         md_meta = md_parts.size >= 3 ? YAML.safe_load(md_parts[1]) : {}
-        story_body = 
-          md_parts.size >= 3 ? md_parts[2..].join("---").strip : md_content.strip
+        story_body = parse_story_body(md_parts, md_content)
 
         yml_meta = yml_content.to_s.strip.empty? ? {} : YAML.safe_load(yml_content)
         meta = symbolize_keys(md_meta.merge(yml_meta))
@@ -54,6 +53,16 @@ module Exposure
           images:      ordered_images,
           hidden:      meta[:hidden] == true
         )
+      end
+
+      private
+
+      def parse_story_body(md_parts, md_content)
+        if md_parts.size >= 3
+          md_parts[2..].join("---").strip
+        else
+          md_content.strip
+        end
       end
     end
   end

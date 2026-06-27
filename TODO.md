@@ -8,23 +8,21 @@
 
 # Code design (developer)
 
-- [ ] design merging albums tests
-- [ ] fix albums merging
-  - [ ] insert new pictures into storyboard according to original craation time
-  - [ ] do not repeat html comment about describing
-  - [ ] move the commend abouve from code into Config
-- [ ] evalute github pages limits for having images for different screen size
-  - [ ] maybe redesign site and synch process for having screen size optimized images
+- [x] design merging albums tests
+- [x] fix albums merging
+  - [x] insert new pictures into storyboard according to original craation time
+  - [x] do not repeat html comment about describing
+  - [x] move the commend abouve from code into Config
 
 # Site design (web developer)
 
-- [ ] simplify lightbox by removing image framing (mat and frame)
-  - [ ] only image and white box around left, no title
-  - [ ] only one dark gray background
-  - [ ] "full screen", 'link', "close" options
+- [x] simplify lightbox by removing image framing (mat and frame)
+  - [x] only image and white box around left, no title
+  - [x] only one dark gray background
+  - [x] "full screen", 'link', "close" options
 - [x] new favicon.svg
-- [x] new foucusing-screen.svg icon
-- [ ] use focusing-screen.svg in site header as a divider instead of dot between `Nikolay Voynov. Exposure`
+- [x] new foucusing-screen.svg icon а f
+- [x] use focusing-screen.svg in site header as a divider instead of dot between `Nikolay Voynov. Exposure`
 - [ ] update about page by removing frame and adding avatar (see docs/assets/about_view.svg)
 
 # Gallery owner
@@ -42,3 +40,6 @@
 - [ ] prepare two new albums
   - [ ] Stonetomb
   - [ ] Kytaevo
+
+
+

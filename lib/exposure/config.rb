@@ -66,6 +66,20 @@ module Exposure
       @default_location       = default_location.to_s
       freeze
     end
+    
+    def album_manifesto_guideline
+      <<~HTML.freeze
+        <!--
+        # -------------------------------------------------------------------
+        # ARTIST MANIFESTO WORKSPACE
+        # -------------------------------------------------------------------
+        # Write your extensive creative narrative, exhibition background,
+        # or standalone conceptual photography stories in the text area below.
+        # To configure individual photo captions, use the ALBUM.yml file.
+        # -------------------------------------------------------------------
+        -->
+      HTML
+    end
   end
 
   # Infrastructure proxy Singleton managing the active configuration state
@@ -78,16 +92,14 @@ module Exposure
     # Forward all configuration attributes readers straight to the internal data object
     def_delegators :@data, :gallery_path, :max_short_side, :unsharp_enabled,
                            :unsharp_spec, :supported_formats, :default_album_keywords,
-                           :default_image_keywords, :default_genre, :default_location
+                           :default_image_keywords, :default_genre, :default_location,
+                           :album_manifesto_guideline
 
     def initialize
       # Start with a pristine fallback default dataset
       @data = ConfigData.new
     end
-
-    # @return [Config] loads and synchronizes the active instance context state
-# Inside lib/exposure/config.rb -> class Config block context
-
+    
     # @return [Config] loads and synchronizes the active instance context state
     def self.read
       if File.exist?(CONFIG_FILE)
