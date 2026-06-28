@@ -87,12 +87,33 @@ module Exposure
       def create_scattered_portfolio(images:, compiled_wm:, output:)
         raise ArgumentError, 'Requires exactly 5 images' if images.length != 5
 
+        # layers_config = [
+        #   { max_dim: '350x350', rot: -4, border: 6, pos: '+150+100' }, 
+        #   { max_dim: '320x320', rot: 5,  border: 6, pos: '+650+80'  }, 
+        #   { max_dim: '360x360', rot: -2, border: 6, pos: '+200+300' }, 
+        #   { max_dim: '340x340', rot: 3,  border: 6, pos: '+680+190' }, 
+        #   { max_dim: '450x450', rot: -1, border: 8, pos: '+380+140' }  
+        # ]
+
+        # Refactored: Expanded bounding boxes and adjusted positions 
+        # to "paint with broader strokes", eliminating dead whitespace.
+        # layers_config = [
+        #   { max_dim: '420x420', rot: -5, border: 6, pos: '+60+60' },   # Bottom-left (Moved closer to edge)
+        #   { max_dim: '390x390', rot: 6,  border: 6, pos: '+720+50' },  # Bottom-right (Expanded and spread out)
+        #   { max_dim: '430x430', rot: -3, border: 7, pos: '+120+240' }, # Mid-left
+        #   { max_dim: '410x410', rot: 4,  border: 7, pos: '+740+220' }, # Mid-right
+        #   { max_dim: '540x540', rot: -1, border: 9, pos: '+330+60' }   # Main HERO print (Dominant center anchor)
+        # ]
+
+        # Recalibrated composition grid:
+        # - Move layer 0 (top-left) higher and further left.
+        # - Push layers 1 and 3 (right side) inwards to safe margins.
         layers_config = [
-          { max_dim: '350x350', rot: -4, border: 6, pos: '+150+100' }, 
-          { max_dim: '320x320', rot: 5,  border: 6, pos: '+650+80'  }, 
-          { max_dim: '360x360', rot: -2, border: 6, pos: '+200+300' }, 
-          { max_dim: '340x340', rot: 3,  border: 6, pos: '+680+190' }, 
-          { max_dim: '450x450', rot: -1, border: 8, pos: '+380+140' }  
+          { max_dim: '430x430', rot: -6, border: 6, pos: '+30+20' },   # 0. Top-left (Raised and pushed left)
+          { max_dim: '390x390', rot: 5,  border: 6, pos: '+680+60' },  # 1. Top-right (Pulled inwards from edge)
+          { max_dim: '430x430', rot: -3, border: 7, pos: '+110+250' }, # 2. Bottom-left
+          { max_dim: '410x410', rot: 4,  border: 7, pos: '+690+230' }, # 3. Bottom-right (Pulled inwards from edge)
+          { max_dim: '540x540', rot: -1, border: 9, pos: '+320+65' }   # 4. Main Hero print anchor
         ]
 
         temp_cards = []

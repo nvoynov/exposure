@@ -21,6 +21,9 @@
 
 # Site design (web developer)
 
+- [ ] og image for main page lost
+- [ ] based on series facebook preview, it has too much extra space from top-left corner
+
 - [ ] create the exposition presentation image for social media by sharing the exposition link
   - [ ] it must mimic "Todd Hido" image wall
   - [ ] it must add the gallery watermark (focusing-screen.svg)

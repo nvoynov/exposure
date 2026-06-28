@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Home
+image: /assets/gallery/og_cover.jpg
 ---
 
 {::options parse_block_html="false" /}
