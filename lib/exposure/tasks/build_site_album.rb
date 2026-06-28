@@ -57,14 +57,25 @@ module Exposure
 
           album_local_thumbs << thumb_dest_path
         end
-
-        # 4. Bake localized album Open Graph square matrix cover layout
-        if album_local_thumbs.size >= 4
-          album_cover_dest = 
-            File.join(assets_dest_root, web_album.slug, "og_album_cover.jpg")
-          sampled_thumbs = album_local_thumbs.sample(4)
-          @transform_port.montage(sources: sampled_thumbs, destination: album_cover_dest)
+        
+        # 4. Bake localized album Open Graph scattered collage deck layout
+        config = Exposure::Config.instance
+        album_cover_dest = 
+          File.join(assets_dest_root, web_album.slug, "og_album_cover.jpg")
+        
+        # Safe fallback buffer: extract up to 5 images or prepare to pad array
+        base_samples = album_local_thumbs.first(5)
+        
+        # Dynamically append the blank holder if the active pool is immature
+        while base_samples.size < 5
+          base_samples << config.blank_holder_path
         end
+
+        @transform_port.create_scattered_portfolio(
+          images: base_samples,
+          compiled_wm: config.compiled_watermark_path,
+          output: album_cover_dest
+        )
 
         album_local_thumbs
       end

@@ -80,6 +80,19 @@ module Exposure
         -->
       HTML
     end
+    
+    # Returns the absolute path to the pre-rendered production PNG watermark
+    # @return [String] absolute track to the identity asset file
+    def compiled_watermark_path
+      # Resolves absolute path relative to this file's location inside lib/
+      File.expand_path('../assets/og-watermark.png', __dir__)
+    end
+
+    # Returns the absolute path to the global backup blank placeholder image
+    # @return [String] absolute route to the placeholder image asset
+    def blank_holder_path
+      File.expand_path('../../site/assets/presets/blank_holder.webp', __dir__)
+    end
   end
 
   # Infrastructure proxy Singleton managing the active configuration state
@@ -93,7 +106,8 @@ module Exposure
     def_delegators :@data, :gallery_path, :max_short_side, :unsharp_enabled,
                            :unsharp_spec, :supported_formats, :default_album_keywords,
                            :default_image_keywords, :default_genre, :default_location,
-                           :album_manifesto_guideline
+                           :album_manifesto_guideline, :compiled_watermark_path,
+                           :blank_holder_path
 
     def initialize
       # Start with a pristine fallback default dataset
