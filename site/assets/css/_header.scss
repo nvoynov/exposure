@@ -4,7 +4,8 @@
 
 .site-header {
   display: flex !important;
-  justify-content: space-between !important;
+  flex-direction: column !important; /* Forces title and nav to stack one under another */
+  justify-content: center !important; /* Math center alignment for both blocks */
   align-items: center !important;
   width: 100% !important;
   padding: 40px 0 !important;
@@ -12,13 +13,21 @@
   border-bottom: 1px solid #f0f0f0 !important;
 }
 
-/* Main Brand Typography Anchor */
+/* Base Title Block Margin Wrapper */
+.site-title {
+  margin-bottom: 25px !important; /* Generous negative space between title and menu */
+  text-align: center !important;
+}
+
+/* Main Brand Typography Anchor Configuration */
+.site-header h1 a,
+.site-title a,
 .site-title h1 a {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   text-decoration: none !important;
-  color: var(--text-primary) !important;
+  color: #1a1a1a !important;
   font-weight: 300 !important;
   font-size: 22px !important;
   letter-spacing: 2px !important;
@@ -28,42 +37,50 @@
 /* Header Divider Icon (Glyph) Precise Optical Reset */
 .header-divider-icon {
   display: block !important;
-  height: 0.85rem !important;
+  height: 1.55rem !important;      /* Expanded by 25% to perfectly match uppercase text height block */
   width: auto !important;
-  margin: 0 0.8rem !important;
+  margin: 0 1rem !important;        /* Slightly widened margin gaps for optical balance */
   opacity: 0.85 !important;
-  
-  /* Physical coordinate shift to bypass strict flexbox alignment */
   position: relative !important;
-  top: 6px !important;
+  
+  /* 
+     RECALIBRATED COMPENSATOR:
+     Adjusted to 2px to lock the center rangefinder crosshairs straight 
+     onto the text optical baseline.
+  */
+  top: 2px !important; 
   transition: opacity 0.2s ease;
 }
 
-/* Navigation Links Wrapper */
+/* Navigation Links Wrapper Centered Frame */
 .site-nav {
   display: flex !important;
-  gap: var(--gutter-width) !important;
+  gap: 30px !important; /* Restored explicit standard margin gap token */
+  justify-content: center !important;
+  align-items: center !important;
 
   .nav-link {
-    font-size: 11px !important;
+    font-size: 13px !important;
     font-weight: 400 !important;
     text-transform: uppercase !important;
-    letter-spacing: 1.5px !important;
-    color: var(--text-muted) !important;
+    letter-spacing: 2px !important;
+    color: #666666 !important;
 
     &:hover,
     &.active {
-      color: var(--text-primary) !important;
+      color: #1a1a1a !important;
     }
   }
 }
 
-/* Responsive Scaling Breakpoints for Small Screens */
+/* Responsive Mobile Layout Scaling (Maintains Clean Flow) */
 @media (max-width: 767px) {
   .site-header {
-    flex-direction: column !important;
-    gap: 20px !important;
     padding: 30px 0 !important;
+    gap: 15px !important;
+  }
+  
+  .site-title {
+    margin-bottom: 15px !important;
   }
 }
-

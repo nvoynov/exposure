@@ -1,11 +1,47 @@
-# site/assets/css/style.css
 ---
 ---
+
 /* ==========================================================================
-   EXPOSURE GALLERY MASTER STYLESHEET (SCSS ARCHITECTURE)
+   EXPOSURE GALLERY - CORE SCSS MODULAR DISPATCHER
    ========================================================================== */
 
-@import "base";
-@import "header";
-@import "series";
-@import "about";
+// Explicitly forcing local directory lookup via relative paths
+@import "./base";
+@import "./header";
+@import "./series";
+@import "./about";
+
+/* ==========================================================================
+   PRODUCTION LIGHTBOX OVERLAYS STATE MICRO-ACTIONS - ISOLATED FIXED
+   ========================================================================== */
+.lightbox {
+  /* Targets strictly specific utility top-bar buttons to prevent event leakage */
+  .toolbar-icon-btn,
+  .close-btn {
+    color: #e5e5e5 !important;
+    opacity: 0.65 !important;
+    transition: color 0.2s ease, opacity 0.2s ease, transform 0.1s ease !important;
+    pointer-events: auto !important; /* Forces physical mouse clicks to pass straight to JS runtime */
+  }
+
+  .toolbar-icon-btn:hover,
+  .close-btn:hover {
+    color: #e11d48 !important; /* Fixed fallback directly to Accent Crimson */
+    opacity: 1 !important;
+  }
+
+  .toolbar-icon-btn:active,
+  .close-btn:active {
+    transform: scale(0.92) !important; /* Tactical deflection feedback matrix */
+  }
+  
+  /* 
+     SAFE RESCUE FOR SLIDESHOW NAV ARROWS:
+     Ensures that arrow buttons maintain native click propagation behavior 
+     without any transformation scaling locks freezing the event bubble.
+  */
+  .nav-btn {
+    pointer-events: auto !important;
+    transform: none !important;
+  }
+}

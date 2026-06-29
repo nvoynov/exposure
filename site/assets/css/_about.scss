@@ -31,11 +31,12 @@
     margin-bottom: 20px !important;
   }
 
+  /* FIXED: Restored rich readable text font scale and generous leading */
   p {
-    color: #444444 !important;
-    font-size: 11px !important;
-    line-height: 1.6 !important;
-    margin-bottom: 20px !important;
+    color: #333333 !important;
+    font-size: 13.5px !important;    /* Clean, comfortable editorial scale */
+    line-height: 1.75 !important;   /* Generous book-like breathing space */
+    margin-bottom: 22px !important;
   }
 
   hr {

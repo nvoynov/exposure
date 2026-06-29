@@ -1,31 +1,38 @@
 /* ==========================================================================
-   GLOBAL RESET, VARIABLES & EDITORIAL BASE TYPOGRAPHY
+   GLOBAL RESET AND EDITORIAL BASE TYPOGRAPHY
    ========================================================================== */
 
-/* Typography Typography Framework & Color Tokens */
-:root {
-  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  --bg-primary: #ffffff;
-  --text-primary: #1a1a1a;
-  --text-muted: #666666;
-  --accent-crimson: #e11d48;
-  --gutter-width: 30px;
-}
-
-/* Base Body Layout Sanitization */
+/* Base Body Layout Sanitization & Fixed Magazine Typo Scale */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+html {
+  font-size: 16px !important; /* Forces a rock-solid root font scale baseline */
+}
+
 body {
-  font-family: var(--font-family);
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  line-height: 1.5;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif !important;
+  background-color: #ffffff !important;
+  color: #1a1a1a !important;
+  font-size: 14px !important; /* Restores the original comfortable text readability scale */
+  line-height: 1.6 !important; /* Generous line leading for editorial breathing space */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* 
+   ADDED CONTAINER:
+   Pins the entire website layout max-width to exactly 1000px 
+   and centers it on any screen, matching the album view.
+*/
+.site-container {
+  max-width: 1000px !important;
+  margin: 0 auto !important;
+  padding: 0 20px !important; /* Fluid safety margins on mobile screens */
+  box-sizing: border-box !important;
 }
 
 main {
@@ -40,7 +47,7 @@ a {
   transition: color 0.2s ease, opacity 0.2s ease;
 
   &:hover {
-    color: var(--accent-crimson);
+    color: #e11d48; /* Direct fallback straight to Accent Crimson */
   }
 }
 
@@ -50,9 +57,8 @@ footer {
   padding: 60px 0;
   margin-top: 80px;
   border-top: 1px solid #f0f0f0;
-  font-size: 11px;
-  color: var(--text-muted);
+  font-size: 12px;                    /* Soft upgrade from 11px to balance the menu weight */
+  color: #666666;
   text-align: center;
   letter-spacing: 0.5px;
 }
-

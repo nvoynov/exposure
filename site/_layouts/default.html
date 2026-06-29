@@ -3,75 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Dynamic title: combines page title and site title from _config.yml -->
   <title>{{ page.title }} | {{ site.title }}</title>
-
-  <!-- Automatic SEO metadata generator (Handles Titles, OpenGraph, Twitter Cards) -->
   {% seo %}
-  
-  <!-- Injects the Google Analytics switch script -->
   {% include analytics.html %}
-  
-  <!-- Forced absolute URL context to guarantee cross-browser SVG favicon rendering -->
   <link rel="icon" type="image/svg+xml" sizes="any" href="{{ '/favicon.svg?v=3' | absolute_url }}">
-
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
 <body>
-  <!-- site/_layouts/default.html -->
-  <header class="site-header">
-    <div class="site-title">
-      <h1>
-        <a href="{{ '/' | relative_url }}">
-          Nikolay Voynov
-          <img src="{{ '/glyph.svg' | relative_url }}" class="header-divider-icon" alt="" />
-          Exposure
-        </a>
-      </h1>
-    </div>
-    <nav class="site-nav">
-      <a href="{{ '/' | relative_url }}" class="nav-link">Main</a>
-      <a href="{{ '/series/' | relative_url }}" class="nav-link">Series</a>
-      <a href="{{ '/about/' | relative_url }}" class="nav-link">About</a>
-    </nav>
-  </header>
 
-  <main>
-    <!-- Dynamic page conditional architecture -->
-    {% if page.url contains '/about/' %}
-      <div class="about-container-layout">
-        <div class="about-text-content-block">
-          {{ content }}
-        </div>
-        
-        <!-- The hand-drawn blind debossing vector layout -->
-        <div class="about-artwork-blueprint">
-          <svg xmlns="http://w3.org" viewBox="0 0 200 260" fill="none" stroke="#f2ede4" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round">
-            <!-- Outer handmade wood profile lines -->
-            <path d="M 12 14 L 186 12 L 188 246 L 14 248 Z" />
-            <path d="M 16 18 L 182 16 L 184 242 L 18 244 Z" />
-            
-            <!-- Inner asymmetric weighted mat board cut window -->
-            <path d="M 42 45 L 158 43 L 160 195 L 44 198 Z" />
-            
-            <!-- Core beveled card exposure line -->
-            <path d="M 44 47 L 156 45 L 158 193 L 46 196 Z" />
-          </svg>
-        </div>
+  <div class="site-container">
+
+    <header class="site-header">
+      <div class="site-title">
+        <h1>
+          <a href="{{ '/' | relative_url }}">
+            Nikolay Voynov
+            <img src="{{ '/glyph.svg' | relative_url }}" class="header-divider-icon" alt="" />
+            Exposure
+          </a>
+        </h1>
       </div>
-    {% else %}
-      <!-- Standard raw rendering for all other website files -->
-      {{ content }}
-    {% endif %}
-  </main>
+      <nav class="site-nav">
+        <a href="{{ '/' | relative_url }}" class="nav-link">Main</a>
+        <a href="{{ '/series/' | relative_url }}" class="nav-link">Series</a>
+        <a href="{{ '/about/' | relative_url }}" class="nav-link">About</a>
+      </nav>
+    </header>
 
-  <footer>
-    <!-- Ephemeral calendar layout injected dynamically from site configuration -->
-    <p>&copy; {{ "now" | date: "%Y" }} {{ site.author_name }}. All rights reserved.</p>
-    <p style="font-size: 0.75rem; opacity: 0.6; margin-top: 5px;">
-      No images or text on this site may be reproduced or transmitted in any form without prior written permission.
-    </p>
-  </footer>
+    <main>
+      <!-- Standard decoupled entry point: clean injection of any down-stream templates -->
+      {{ content }}
+    </main>
+
+    <footer>
+      <p>&copy; {{ "now" | date: "%Y" }} {{ site.author_name }}. All rights reserved.</p>
+      <p style="font-size: 0.75rem; opacity: 0.6; margin-top: 5px;">
+        No images or text on this site may be reproduced or transmitted in any form without prior written permission.
+      </p>
+    </footer>
+
+  </div>
 
 </body>
 </html>
