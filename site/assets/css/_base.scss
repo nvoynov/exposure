@@ -1,0 +1,58 @@
+/* ==========================================================================
+   GLOBAL RESET, VARIABLES & EDITORIAL BASE TYPOGRAPHY
+   ========================================================================== */
+
+/* Typography Typography Framework & Color Tokens */
+:root {
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --bg-primary: #ffffff;
+  --text-primary: #1a1a1a;
+  --text-muted: #666666;
+  --accent-crimson: #e11d48;
+  --gutter-width: 30px;
+}
+
+/* Base Body Layout Sanitization */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  display: block;
+  width: 100%;
+}
+
+/* Global Link Micro-Interactions Framework */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease, opacity 0.2s ease;
+
+  &:hover {
+    color: var(--accent-crimson);
+  }
+}
+
+/* Clean Editorial Footer Matrix */
+footer {
+  width: 100%;
+  padding: 60px 0;
+  margin-top: 80px;
+  border-top: 1px solid #f0f0f0;
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+

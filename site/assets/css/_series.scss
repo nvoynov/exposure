@@ -1,0 +1,76 @@
+
+/* ==========================================================================
+   SERIES OVERVIEW & SCATTERED PREVIEW CARDS CLOUD
+   ========================================================================== */
+
+/* Main Series Layout Grid Wrapper */
+.series-grid-container {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important;
+  gap: 40px !important;
+  width: 100% !important;
+  margin-top: 20px !important;
+}
+
+/* Individual Series Card Framework */
+.series-card-item {
+  display: flex !important;
+  flex-direction: column !important;
+  text-decoration: none !important;
+  color: inherit !important;
+  margin-bottom: 30px !important;
+
+  &:hover {
+    .series-preview-cloud img {
+      transform: translateY(-4px) scale(1.02) !important;
+    }
+  }
+}
+
+/* Pack exactly 5 preview cards into a tight scattered stack */
+.series-preview-cloud {
+  display: block !important;
+  position: relative !important;
+  height: 280px !important; /* Forces strict window lock boundary */
+  width: 100% !important;
+  margin: 20px 0 50px 0 !important;
+  background-color: #fafafa !important;
+  border: 1px solid #f0f0f0 !important;
+  overflow: hidden !important;
+}
+
+/* Target ANY image element inside the cloud container directly */
+.series-preview-cloud img {
+  position: absolute !important;
+  width: 65% !important; /* Balanced scale on narrow viewports */
+  height: auto !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12) !important;
+  transition: transform 0.3s ease !important;
+  border: 6px solid #ffffff !important;
+}
+
+/* Enforce exact micro-offsets stack order using child indexation */
+.series-preview-cloud img:nth-child(1) { left: 4%;  top: 10px;  z-index: 1; transform: rotate(-4deg); }
+.series-preview-cloud img:nth-child(2) { left: 12%; top: 25px;  z-index: 2; transform: rotate(5deg); }
+.series-preview-cloud img:nth-child(3) { left: 20%; top: 40px;  z-index: 3; transform: rotate(-2deg); }
+.series-preview-cloud img:nth-child(4) { left: 28%; top: 55px;  z-index: 4; transform: rotate(3deg); }
+.series-preview-cloud img:nth-child(5) { left: 36%; top: 70px;  z-index: 5; transform: rotate(-1deg); box-shadow: 0 12px 32px rgba(0,0,0,0.16) !important; }
+
+/* Album Typography Block Metadata */
+.series-meta-block {
+  margin-top: 15px !important;
+
+  .series-title {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    margin-bottom: 5px !important;
+  }
+
+  .series-details {
+    font-size: 11px !important;
+    color: var(--text-muted) !important;
+    letter-spacing: 0.2px !important;
+  }
+}

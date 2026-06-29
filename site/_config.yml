@@ -29,3 +29,7 @@ baseurl: "/exposure"
 
 # FIX: Manually specify repository to bypass local GitHub API environment checks
 repository: "nvoynov/exposure"
+
+# Sass Preprocessor Configuration
+sass:
+  sass_dir: assets/css

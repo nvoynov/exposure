@@ -1,0 +1,69 @@
+/* ==========================================================================
+   SITE HEADER, NAVIGATION AND OPTICAL GLYPH ALIGNMENT
+   ========================================================================== */
+
+.site-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100% !important;
+  padding: 40px 0 !important;
+  margin-bottom: 40px !important;
+  border-bottom: 1px solid #f0f0f0 !important;
+}
+
+/* Main Brand Typography Anchor */
+.site-title h1 a {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+  color: var(--text-primary) !important;
+  font-weight: 300 !important;
+  font-size: 22px !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+}
+
+/* Header Divider Icon (Glyph) Precise Optical Reset */
+.header-divider-icon {
+  display: block !important;
+  height: 0.85rem !important;
+  width: auto !important;
+  margin: 0 0.8rem !important;
+  opacity: 0.85 !important;
+  
+  /* Physical coordinate shift to bypass strict flexbox alignment */
+  position: relative !important;
+  top: 6px !important;
+  transition: opacity 0.2s ease;
+}
+
+/* Navigation Links Wrapper */
+.site-nav {
+  display: flex !important;
+  gap: var(--gutter-width) !important;
+
+  .nav-link {
+    font-size: 11px !important;
+    font-weight: 400 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.5px !important;
+    color: var(--text-muted) !important;
+
+    &:hover,
+    &.active {
+      color: var(--text-primary) !important;
+    }
+  }
+}
+
+/* Responsive Scaling Breakpoints for Small Screens */
+@media (max-width: 767px) {
+  .site-header {
+    flex-direction: column !important;
+    gap: 20px !important;
+    padding: 30px 0 !important;
+  }
+}
+

@@ -1,0 +1,103 @@
+/* ==========================================================================
+   ABOUT PAGE LAYOUT & TECHNICAL BLUEPRINT VECTOR STYLES
+   ========================================================================== */
+
+/* 1. Master Container Layout Configuration */
+.about-container-layout {
+  display: grid !important;
+  grid-template-columns: 55% 45% !important; /* Editorial uneven column lines */
+  gap: 50px !important;
+  align-items: center !important;
+  width: 100% !important;
+  margin-top: 30px !important;
+}
+
+/* 2. Text Content Block Editorial Typography */
+.about-text-content-block {
+  h2 {
+    font-weight: 300 !important;
+    font-size: 22px !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    margin-bottom: 25px !important;
+  }
+
+  h3 {
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    margin-top: 40px !important;
+    margin-bottom: 20px !important;
+  }
+
+  p {
+    color: #444444 !important;
+    font-size: 11px !important;
+    line-height: 1.6 !important;
+    margin-bottom: 20px !important;
+  }
+
+  hr {
+    border: none !important;
+    border-top: 1px solid #f0f0f0 !important;
+    margin: 35px 0 !important;
+  }
+}
+
+/* 3. Elegant Contact List Matrix */
+.about-contact-list {
+  padding-left: 0 !important;
+  list-style: none !important; /* Technical bullets dropped for clean look */
+  margin-top: 20px !important;
+
+  li {
+    font-size: 11px !important;
+    line-height: 1.6 !important;
+    color: #444444 !important;
+    margin-bottom: 8px !important;
+  }
+}
+
+/* 4. Right Column Blueprint Canvas Wrapper */
+.about-artwork-blueprint {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: 320px !important;
+  margin: 0 auto !important;
+}
+
+.about-focus-screen-svg {
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+}
+
+/* Technical camera focus screen blueprint lines */
+.blueprint-line {
+  fill: none !important;
+  stroke: var(--text-primary) !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+  opacity: 0.12 !important; /* Subdued technical draft look */
+  transition: stroke 0.3s ease, opacity 0.3s ease !important;
+}
+
+/* ==========================================================================
+   PRODUCTION RESPONSIVE MOBILE BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 767px) {
+  .about-container-layout {
+    display: flex !important;
+    flex-direction: column-reverse !important; /* Text on top, blueprint icon on bottom */
+    gap: 40px !important;
+  }
+
+  .about-artwork-blueprint {
+    max-width: 200px !important;
+    margin: 20px auto 0 auto !important;
+  }
+}
+
