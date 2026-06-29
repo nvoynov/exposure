@@ -13,7 +13,7 @@
   {% include analytics.html %}
   
   <!-- Forced absolute URL context to guarantee cross-browser SVG favicon rendering -->
-  <link rel="icon" type="image/svg+xml" sizes="any" href="{{ '/favicon.svg?v=3' | relative_url | absolute_url }}">
+  <link rel="icon" type="image/svg+xml" sizes="any" href="{{ '/favicon.svg?v=3' | absolute_url }}">
 
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
@@ -24,7 +24,7 @@
       <h1>
         <a href="{{ '/' | relative_url }}">
           Nikolay Voynov
-          <img src="{{ '/focusing_screen_tight.svg' | relative_url }}" class="header-divider-icon" alt="" />
+          <img src="{{ '/glyph.svg' | relative_url }}" class="header-divider-icon" alt="" />
           Exposure
         </a>
       </h1>

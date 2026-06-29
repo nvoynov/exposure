@@ -1,23 +1,24 @@
+# lib/exposure/tasks/build_album.rb
 require 'date'
+require_relative 'base'
 require_relative '../model'
-require_relative '../config'
 require_relative '../builder'
 require_relative '../presenter'
 
 module Exposure
   module Task
 
-    class BuildAlbum
+    # Core use-case compiling, synchronizing and merging album data from disk
+    class BuildAlbum < Base
       MD_LEDGER  = "ALBUM.md"
       YML_LEDGER = "ALBUM.yml"
 
-      def initialize(metadata_port:)
-        raise ArgumentError, "Missing required metadata_port!" unless metadata_port
-        @metadata_port = metadata_port
+      def initialize
+        # Intentionally empty: port adapters are resolved dynamically via Base
       end
 
       # @param album_path [String] path to a specific album directory
-      # @return [Model::Album] compiled, synchronized, read-only domain aggregate
+      # @return [Model::Album, nil] read-only consolidated domain aggregate
       def call(album_path)
         dirname = File.basename(album_path)
         formats = Exposure::Config.instance.supported_formats
@@ -28,26 +29,28 @@ module Exposure
 
         return nil if master_files.empty?
 
-        # 1. Scrap reference files straight from disk Footprints
-        exif_catalog = @metadata_port.extract(album_path, master_files)
+        # 1. Scrap reference files straight from disk footprints via decoupled port
+        exif_catalog = exif_metadata.extract(album_path, master_files)
         fresh_images = build_fresh_images_pool(dirname, master_files, exif_catalog)
         
-        reference_album = Builder::Album.new.call(dirname: dirname, fresh_images: fresh_images)
+        reference_album = Builder::Album.new.call(
+          dirname: dirname, fresh_images: fresh_images
+        )
 
-        # 2. Materialize author edits if files exist
+        # 2. Materialize author edits if state metadata files exist
         md_path  = File.join(album_path, MD_LEDGER)
         yml_path = File.join(album_path, YML_LEDGER)
 
         saved_album = 
           if File.exist?(md_path) && File.exist?(yml_path)
             Builder::UserAlbum.new.call(
-              md_content: File.read(md_path), yml_content: File.read(yml_path), dirname: dirname
+              md_content:  File.read(md_path), 
+              yml_content: File.read(yml_path), 
+              dirname:     dirname
             )
-          else
-            nil
           end
 
-        # 3. Securely calculate the consolidated result inside Domain Layer object
+        # 3. Securely calculate the consolidated result inside domain model
         final_album = reference_album.merge(saved_album)
 
         # 4. Dump clean flat updates back to author environment files
@@ -60,13 +63,12 @@ module Exposure
 
       private
 
-      # Inside lib/exposure/tasks/build_album.rb -> def build_fresh_images_pool
-
+      # Compiles raw metadata fields into structured immutable image models pool
       def build_fresh_images_pool(dirname, master_files, exif_catalog)
         config = Exposure::Config.instance
         
-        sorted_files = master_files.sort_by do |f|
-          exif_catalog[File.basename(f, ".*").to_sym]&.[](:exif_time) || ""
+        sorted_files = master_files.sort_by do
+          exif_catalog[File.basename(it, ".*").to_sym]&.[](:exif_time) || ""
         end
 
         sorted_files.map do |f|
@@ -76,7 +78,7 @@ module Exposure
           
           parsed_time = 
             if meta[:exif_time]
-              # Explicitly format the strict ExifTool colon-separated schema using DateTime
+              # Explicitly format the strict ExifTool colon-separated schema
               DateTime.strptime(meta[:exif_time], "%Y:%m:%d %H:%M:%S").to_time
             else
               File.mtime(file_route)
@@ -92,7 +94,6 @@ module Exposure
             created_at:  parsed_time
           )
         end
-
       end
     end
   end

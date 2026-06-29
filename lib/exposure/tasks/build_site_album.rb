@@ -1,5 +1,6 @@
+# lib/exposure/tasks/build_site_album.rb
 require 'fileutils'
-require_relative '../config'
+require_relative 'base'
 require_relative '../decorator'
 require_relative '../presenter'
 
@@ -7,12 +8,10 @@ module Exposure
   module Task
 
     # Micro-use-case compiling assets and layouts for a singular web album
-    class BuildSiteAlbum
+    class BuildSiteAlbum < Base
 
-      # @param transform_port [Ports::ImageTransformation] image pipeline port
-      def initialize(transform_port:)
-        @transform_port = transform_port
-        
+      # Initialize clean use case state without infrastructure coupling
+      def initialize
         # Pull the global path once upon initialization to clean call signature
         @gallery_path = Exposure::Config.instance.gallery_path
       end
@@ -41,7 +40,6 @@ module Exposure
 
         # 3. Stream master photo files through high-level clean ports
         web_album.images.each do |image|
-          # Use the localized instance variable securely
           source_file_path = 
             File.join(@gallery_path, web_album.dirname, image.filename)
           next unless File.exist?(source_file_path)
@@ -52,30 +50,36 @@ module Exposure
           full_dest_path  = File.join(album_dest_full, full_out_name)
           thumb_dest_path = File.join(album_dest_thumbs, thumb_out_name)
 
-          @transform_port.convert_to_full(source: source_file_path, destination: full_dest_path)
-          @transform_port.convert_to_thumbnail(source: source_file_path, destination: thumb_dest_path)
+          image_transformation.convert_to_full(source: source_file_path, destination: full_dest_path)
+          image_transformation.convert_to_thumbnail(source: source_file_path, destination: thumb_dest_path)
 
           album_local_thumbs << thumb_dest_path
         end
-        
+
         # 4. Bake localized album Open Graph scattered collage deck layout
         config = Exposure::Config.instance
         album_cover_dest = 
           File.join(assets_dest_root, web_album.slug, "og_album_cover.jpg")
-        
-        # Safe fallback buffer: extract up to 5 images or prepare to pad array
-        base_samples = album_local_thumbs.first(5)
-        
-        # Dynamically append the blank holder if the active pool is immature
-        while base_samples.size < 5
-          base_samples << config.blank_holder_path
-        end
 
-        @transform_port.create_scattered_portfolio(
-          images: base_samples,
-          compiled_wm: config.compiled_watermark_path,
-          output: album_cover_dest
-        )
+        # Smart cache guard bypass: track delta collection sizes changes
+        existing_thumbs_count = Dir.glob(File.join(album_dest_thumbs, "*.webp")).size
+        collection_changed = web_album.images.size != existing_thumbs_count
+
+        # Force rebuild if the file is physically missing or if collection grew
+        if !File.exist?(album_cover_dest) || collection_changed
+          base_samples = album_local_thumbs.first(5)
+          
+          # Dynamically append the blank holder if the active pool is immature
+          while base_samples.size < 5
+            base_samples << config.blank_holder_path
+          end
+
+          image_transformation.create_scattered_portfolio(
+            images: base_samples,
+            compiled_wm: config.watermark_path,
+            output: album_cover_dest
+          )
+        end
 
         album_local_thumbs
       end

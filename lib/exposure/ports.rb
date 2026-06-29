@@ -1,5 +1,6 @@
 require_relative 'ports/exif_metadata'
 require_relative 'ports/image_transformation'
+require_relative 'ports/adapters'
 
 module Exposure
   # Abstract Boundary Ports Layer isolating core use cases from external I/O

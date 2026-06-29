@@ -25,19 +25,23 @@ namespace :gallery do
       puts "[Setup Wizard] Configuration successfully locked and saved.\n\n"
     end
 
-    # 2. Spin up concrete infrastructure adapters based on clean ports
+    # 2. Spin up concrete infrastructure adapters and lock them into the registry
     puts "[Infrastructure] Initializing system I/O tool adapters..."
-    exif_adapter  = Exposure::Adapters::ExifToolAdapter.new
-    image_adapter = Exposure::Adapters::ImageMagickAdapter.new
-
-    # 3. Trigger the final production site compile pipeline orchestrator directly
-    puts "[Pipeline] Generating fluid WebP prints and site asset trees..."
-    site_compiler = 
-      Exposure::Task::BuildSite.new(
-        transform_port: image_adapter,
-        metadata_port:  exif_adapter
-      )
     
+    # Updated: renamed metadata_port slot to exif_metadata
+    container = Struct.new(:exif_metadata, :image_transformation).new(
+      Exposure::Adapters::ExifToolAdapter.new,
+      Exposure::Adapters::ImageMagickAdapter.new
+    )
+    
+    # Freeze the infrastructure layer globally at boot time
+    Exposure::Ports::Adapters.setup(container)
+
+    # 3. Trigger the final production site compile pipeline orchestrator cleanly
+    puts "[Pipeline] Generating fluid WebP prints and site asset trees..."
+    
+    # Decoupled use-case instantiation resolved seamlessly through the base port
+    site_compiler = Exposure::Task::BuildSite.new
     site_compiler.call("site")
 
     puts "========================================================"

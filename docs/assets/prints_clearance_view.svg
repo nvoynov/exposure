@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="540" viewBox="0 0 720 540">
+  <!-- Content area background wireframe -->
+  <rect width="720" height="540" fill="#FFFFFF" />
+
+  <!-- 1) Section Heading (Quiet and modest) -->
+  <text x="40" y="50" font-family="sans-serif" font-size="16" font-weight="600" letter-spacing="1" fill="#111111">[ WORKING PRINTS / LAB CLEARANCE ]</text>
+  <text x="40" y="70" font-family="sans-serif" font-size="11" fill="#777777">Unique test proofs and intermediate sets made during the archival printing process.</text>
+
+  <!-- 2) PRINT SET ENTRY 01 (Row layout) -->
+  <g transform="translate(40, 110)">
+    <!-- Left Side: Visual Representation of the Bundle (e.g., Triptych Set) -->
+    <g transform="translate(0, 0)">
+      <!-- Backdrop container simulating the package box or physical arrangement -->
+      <rect width="320" height="180" fill="none" stroke="#EAEAEA" stroke-width="1" stroke-dasharray="2,2" />
+      <!-- Print 01 -->
+      <rect x="15" y="25" width="80" height="120" fill="#EEEEEE" stroke="#DDDDDD" rx="1" />
+      <text x="55" y="88" font-family="sans-serif" font-size="9" text-anchor="middle" fill="#999999">Print 01</text>
+      <!-- Print 02 -->
+      <rect x="110" y="25" width="90" height="120" fill="#E5E5E5" stroke="#DDDDDD" rx="1" />
+      <text x="155" y="88" font-family="sans-serif" font-size="9" text-anchor="middle" fill="#999999">Print 02</text>
+      <!-- Print 03 -->
+      <rect x="215" y="25" width="80" height="120" fill="#DCDCDC" stroke="#DDDDDD" rx="1" />
+      <text x="255" y="88" font-family="sans-serif" font-size="9" text-anchor="middle" fill="#999999">Print 03</text>
+      <!-- Subtext indicating bundle configuration -->
+      <text x="160" y="165" font-family="sans-serif" font-size="10" text-anchor="middle" fill="#888888">[ Triptych Set / 3 Physical Prints ]</text>
+    </g>
+
+    <!-- Right Side: Informal Author's Note and Specifications -->
+    <g transform="translate(350, 0)">
+      <!-- Short Title & Informal Price Tag -->
+      <text x="0" y="20" font-family="sans-serif" font-size="14" font-weight="600" fill="#1A1A1A">Set #01: Almaznoe Study Blocks</text>
+      <text x="0" y="40" font-family="sans-serif" font-size="12" font-weight="600" fill="#E11D48">Price: $20 USD</text>
+      
+      <!-- Informal Technical Specs -->
+      <g transform="translate(0, 60)" font-family="sans-serif" font-size="10" fill="#777777">
+        <text x="0" y="0"><tspan font-weight="600" fill="#444444">Paper Stock:</tspan> Hahnemühle German Etching (Matte, textured)</text>
+        <text x="0" y="15"><tspan font-weight="600" fill="#444444">Image Size:</tspan> 12 × 18 cm</text>
+        <text x="0" y="30"><tspan font-weight="600" fill="#444444">Paper Size:</tspan> A5 Alternative sheet</text>
+      </g>
+
+      <!-- Author's Personal Note / Review (The "Why") -->
+      <g transform="translate(0, 115)" font-family="sans-serif" font-size="11" fill="#666666">
+        <text x="0" y="0" font-weight="600" fill="#444444">Author's Review:</text>
+        <text x="0" y="18">"These prints were produced as test runs while calibrating</text>
+        <text x="0" y="32">the deep shadow density for the final large-format series.</text>
+        <text x="0" y="46">The heavy texture of German Etching paper gave the mist</text>
+        <text x="0" y="60">a beautiful, painterly feel that I ultimately moved away from."</text>
+      </g>
+
+      <!-- Minimalist Contact Action -->
+      <text x="0" y="200" font-family="sans-serif" font-size="11" font-weight="600" fill="#1A1A1A">[ Claim this set via Email ]</text>
+    </g>
+  </g>
+</svg>

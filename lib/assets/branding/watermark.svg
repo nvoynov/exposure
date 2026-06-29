@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <style>
+    /* System viewer fix: displays dark backdrop only when opened as a standalone image file */
+    :root { background-color: #121212; }
+    .wm-frame { fill: none; stroke: #FFFFFF; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .wm-optics { fill: none; stroke: #FFFFFF; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .wm-matte { fill: #FFFFFF; fill-opacity: 0.12; }
+  </style>
+
+  <!-- Minimalist focus screen watermark overlay (Perfect Square with 6px padding) -->
+  <g opacity="0.75">
+    <!-- Shifted square viewfinder corners (6px padding from 64x64 edges for perfect breathing room) -->
+    <path class="wm-frame" d="M6,16 V6 H16 M48,6 H58 V16 M58,48 V58 H48 M16,58 H6 V48" />
+    
+    <!-- Central split-image rangefinder optics (Enhanced thickness for social media feeds) -->
+    <!-- Outer microprism collar with light matte fill -->
+    <circle class="wm-optics wm-matte" cx="32" cy="32" r="18" />
+    <circle class="wm-optics" cx="32" cy="32" r="18" />
+    <!-- Inner rangefinder wedge circle -->
+    <circle class="wm-optics" cx="32" cy="32" r="10" />
+    <!-- Vertical split line inside the center circle -->
+    <line class="wm-optics" x1="32" y1="22" x2="32" y2="42" />
+  </g>
+</svg>

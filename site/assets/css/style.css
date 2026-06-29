@@ -367,14 +367,45 @@ main a:hover {
   color: #111111 !important;
 }
 
-/* Updated header divider icon rule */
+/* site/assets/css/style.css */
+
+/* UPDATED: Increased vertical coordinate shift to 6px to fully align with uppercase font baseline */
 .header-divider-icon {
-  display: block !important;       /* Block inside flex container prevents alignment lock */
-  height: 1rem !important;          /* Perfect scalable scale matching your uppercase font height */
+  display: block !important;
+  height: 0.9rem !important;
   width: auto !important;
-  margin: 0 0.7rem !important;     /* Clean negative space gaps */
+  margin: 0 0.8rem !important;
   opacity: 0.85 !important;
-  
-  /* Hard offset adjustment if optical illusion still feels high */
-  margin-top: 2px !important;      
+  position: relative !important;
+  top: 6px !important; /* Pushes the rangefinder crosshairs perfectly to the optical center */
 }
+
+/* ==========================================================================
+   NEW ARTWORK BLUEPRINT VECTOR STYLE FOR ABOUT PAGE
+   ========================================================================== */
+.about-artwork-blueprint {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: 320px !important;
+  margin: 0 auto !important;
+}
+
+/* Technical camera focus screen matte lines */
+.blueprint-line {
+  fill: none !important;
+  stroke: #1a1a1a !important;     /* Strict monochrome charcoal token to soften reading */
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+  opacity: 0.12 !important;        /* Subdued baseline technical draft tone */
+}
+
+/* Automatic dark theme system response mapping */
+@media (prefers-color-scheme: dark) {
+  .blueprint-line {
+    stroke: #ffffff !important;     /* Neon white response mapping on dark canvases */
+    opacity: 0.10 !important;
+  }
+}
+

@@ -24,13 +24,14 @@ The core philosophy relies on strict monochrome minimalism, high-density cinemat
 The core brand asset is the **Vector Camera Focus Screen**. This dynamic glyph repeats across multiple scales and layout nodes to unify the platform's visual ecosystem.
 
 ### 2.1 Asset Node A: The Adaptive Favicon (`favicon.svg`)
-The favicon provides the initial interface anchor inside the client's web browser environment.
+
+The favicon provides the initial interface anchor inside the client's web browser environment, designed to match the unified square configuration of the core Brandmark.
 * **Dimensions & Setup**: Strict square pixel container with explicitly bound XML schemas to enforce validation under rigid OS-level rendering contexts (such as macOS Finder, Ubuntu Eye of GNOME, and Nautilus file systems):
   ```xml
   <svg xmlns="http://w3.org" width="32" height="32" viewBox="0 0 32 32">
   ```
-* **Visual Composition**: An optimized, horizontal cinematic rectangle frame (`width: 1px`, rounded corners `rx="1.5"`) with external focus ticks that touch the border but do not intersect the inner area. Centered with an embedded, widened vector typography stack for initials `NV` (`width: 2.5px`).
-* **Cross-Theme Agnosticism**: Implements a redundant dual-layer stroke technique. A thick white background halo stroke (`width: 3px` or `5px`) sits directly underneath the dark primary artwork (`width: 1px` or `2.5px`). This creates an invisible outer outline on bright browser tabs but provides high-contrast neon readability on dark native tabs or private incognito sessions without executing custom DOM script hooks.
+* **Visual Composition**: A strict square viewfinder mask layout with an optimized 2px padding offset from the canvas edges. The corner brackets are configured with enhanced thickness (`stroke-width: 1.5;`) via coordinates `M2,8 V2 H8 M24,2 H30 V8 M30,24 V30 H24 M8,30 H2 V24`. The central split-image optics utilize a denser stroke footprint (`stroke-width: 1.8;`) to guarantee high-fidelity icon clarity down to scaled 16x16px environments.
+* **Cross-Theme Agnosticism**: Implements a redundant dual-layer stroke technique. A thick white background halo stroke (`width: 3px` or `5px`) sits directly underneath the dark primary artwork (`width: 1.5px` or `1.8px`). This creates an invisible outer outline on bright browser tabs but provides high-contrast neon readability on dark native tabs or private incognito sessions without executing custom DOM script hooks.
 
 ### 2.2 Asset Node B: The Header Logo & Structural Splitter
 The focus screen asset transfers directly into the website's persistent top navigation zone (Header), serving as a graphic anchor and text separator.
@@ -38,10 +39,12 @@ The focus screen asset transfers directly into the website's persistent top navi
 * **Aesthetic Integration**: Scaled downward uniformly to fit the exact font baseline bounding height (14px to 16px). It acts as a structural divider, echoing a classic analog film camera's viewfinder overlay grid.
 
 ### 2.3 Asset Node C: Automated Brand Watermarks (`og-watermark.svg`)
-To protect ownership and establish brand authority over link shares, a specialized, high-definition standalone version of the focus screen glyph is rendered directly on social media previews.
-* **Technical Spec**: Fixed dimensions of `64x64` pixels with explicit white paths (`stroke="#FFFFFF"`) embedded with partial opacity attributes (`-channel A -evaluate multiply 0.7`). It is automatically injected in the bottom-right corner (`-gravity southeast -geometry +30+30`) during image processing cycles.
----
+To protect ownership and establish brand authority over link shares, a specialized, high-definition standalone version of the focus screen glyph is rendered directly on social media previews, mirroring the exact square configuration of the core Brandmark.
+* **Technical Spec**: Fixed dimensions of `64x64` pixels with enhanced line weight parameters designed to retain sharp edge definitions across compressed social media timeline matrices. The outer square viewfinder corners use a `2px` stroke profile, configured with a generous 6px breathing room padding offset from the canvas margins via coordinates `M6,16 V6 H16 M48,6 H58 V16 M58,48 V58 H48 M16,58 H6 V48`.
+* **Central Optics Rendering**: The concentric microprism rings and split-image rangefinder lines are rendered with an absolute thickness of `2.5px` and embedded with partial opacity attributes (`opacity="0.75"`).
+* **System Integration**: The asset includes clean inline XML CSS hooks (`:root { background-color: #121212; }`) to ensure crisp white-on-dark previews inside local OS file explorers (macOS Finder, Ubuntu Nautilus), while executing as an entirely transparent alpha-channel overlay during local command-line ImageMagick compilation cycles.
 
+---
 ## 3. Brand Color Palette & Typography Tokens
 
 The Designer must deliver an interactive Design System (UI-Kit) containing components cross-referenced with CSS design tokens.
@@ -153,3 +156,24 @@ The following data matrix defines the concrete dimensions required for deploymen
 ### 7.1 Image Optimization Processing Policies
 1. **Modern Formats Compression**: Next-generation web image encodings (**WebP** and **AVIF**) are mandatory. Legacy formats (JPEG, PNG) must only serve as conditional fallback parameters.
 2. **Exif Scrubbing**: All photographic images must have their non-critical camera metadata strings, GPS parameters, and thumbnail header tracks fully scrubbed via backend utility tools (`exiftool` / pipeline scripts) before deployment to optimize byte delivery over mobile cellular networks. Color space profiles (sRGB) must be carefully preserved.
+
+---
+
+## 8. Appendix: Informal Visual Lab Clearance View (Future Phase)
+
+An optional, unindexed alternative view (`/clearance/` or `/lab/`) may be deployed to baseline the secondary clearance of intermediate working test prints and physical artist's proofs. This section must reject standard e-commerce tropes, acting as an informal "darkroom diary" or laboratory notebook.
+
+### 8.1 Entry Architecture & Hidden Discovery
+* **Discovery Hook**: Access is strictly circumstantial, linked exclusively via an informal textual note within the *About Me* portfolio space. No persistent, high-contrast links or shopping symbols shall appear in the global website layout.
+* **Structural Intent**: The interface is optimized to sell physical print sets (bundles of 2–5 thematic exposures) produced as stepping stones during archival testing cycles.
+
+### 8.2 Presentation & Personal Review Typography
+Every bundle card is parsed horizontally, splitting the viewport into two balanced fields:
+* **Graphic Module (Left)**: Symmetrical display wireframe showing the count and arrangement of physical prints within the set, framed by a muted dashed grid line (`stroke-dasharray="2,2"`).
+* **Narrative Module (Right)**: Contains the informal price token ($18–$20 USD range, mirroring raw production costs), basic sizing arrays (Image Size vs Paper Size), explicit paper manufacturer declarations (*Hahnemühle Photo Rag / German Etching*), and a required **Author's Review** paragraph.
+* **The "Why" Parameter**: The Author's Review must explicitly document the empirical reason for the print's existence — detailing calibration paths, contrast tests, or texture experiments that led to the final works.
+
+### 8.3 Lightweight Conversion Flow
+* **Zero Automation Footprint**: No active data systems, stateful variables, or transaction interfaces are present. 
+* **Plaintext Inquiry Anchor**: Conversion relies entirely on a passive text line component: `[ Claim this set via Email ]`. Clicking the block triggers a static `mailto:` protocol passing pre-defined subject queries to secure the specific clearance run.
+
