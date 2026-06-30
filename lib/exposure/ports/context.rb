@@ -1,4 +1,3 @@
-# lib/exposure/ports/adapters.rb
 require 'forwardable'
 
 module Exposure
@@ -6,7 +5,7 @@ module Exposure
 
     # Static infrastructure gate holding boot-time frozen system adapters.
     # Acts as a centralized service registry under Hexagonal architecture.
-    class Adapters
+    class Context
       class << self
         extend Forwardable
 

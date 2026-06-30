@@ -44,5 +44,23 @@
 
   </div>
 
+  <!-- site/_layouts/default.html -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        // Resolves the absolute sw path relative to the dynamic relative Jekyll base root
+        const swUrl = "{{ '/sw.js' | relative_url }}";
+        
+        navigator.serviceWorker.register(swUrl)
+          .then((reg) => {
+            console.log('Service Worker live. Scope:', reg.scope);
+            // Check for updates to manifest on page load to trigger automatic activation sync
+            reg.update();
+          })
+          .catch((err) => console.error('Service Worker setup stalled:', err));
+      });
+    }
+  </script>
+
 </body>
 </html>

@@ -2,6 +2,7 @@ require 'fileutils'
 require_relative 'base'
 require_relative 'build_gallery'
 require_relative 'build_site_album'
+require_relative 'build_manifest'
 
 module Exposure
   module Task
@@ -53,6 +54,9 @@ module Exposure
           compiled_wm: config.watermark_path,
           output: og_cover_dest
         )
+        
+        # FINAL PASS: Compile the immutable PWA client asset manifest map
+        BuildManifest.new.call(target_site_path)
       end
     end
   end

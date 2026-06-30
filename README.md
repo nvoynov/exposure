@@ -1,25 +1,21 @@
-% Web-Exposure Application Documentation
+% Personal Exposure
 % Nikolay Voynov
 % June 2026
 
 ## Introduction
 
-A minimalist, containerized static website engine and asset optimization pipeline built for photographic series.
+This project is a personal, independent initiative designed with a **"zero-cost, zero-maintenance"** philosophy. 
 
-Inspired by the cinematic, non-linear exhibition layouts of contemporary art photography, **exposure** acts as a silent digital passepartout canvas. It completely separates your raw production tools from the clean, static HTML deliverables deployed to GitHub Pages.
+* **The Purpose:** It serves as a sustainable, dedicated digital home and a single "source of truth" to showcase a curated portfolio of an amateur photographer without any ongoing financial overhead.
+* **Zero Infrastructure Cost:** The architecture relies entirely on static deployment (hosted for free via GitHub Pages). There are no databases, no server-side processing, and no hidden subscriptions.
+* **Designed for Efficiency:** To stay safely within GitHub's free tier limits (100 GB monthly bandwidth), the gallery is optimized for a strict scale—hosting a maximum of 200–300 curated works. 
+* **Asset Optimization:** All images are carefully compressed to the WebP format, capped at 1080px on the short side, maintaining an optimal balance between visual quality (averaging ~600 KB per full image) and performance.
+
+If you are looking to reuse or contribute to this code, please keep this minimalist, ultra-lean approach in mind. It is built to be lightweight, simple, and financially free.
+
+- **Capacity Summary:** Preliminary calculations indicate that under this approach, the website can seamlessly serve around 7,500 visitors per month (averaging 250 daily users viewing ~20 high-quality photos per session) while staying safely within GitHub Pages' free tier limits. Applying Client-Side Caching and assuming a healthy mix of 40% new and 60% returning traffic, the effective capacity scales to **15,000–20,000 sessions per month**, safely below the threshold.
 
 Initial intent of the project can be get in [Specification](/docs/SPEC.md)
-
----
-
-## Features
-
-*   **Dynamic Mosaic Canvas:** Shuffles all photos across all collections on every page visit, arranging them into an asymmetrical mosaic layout with contemplative, slow fade-in behavior and intentional negative space gaps.
-*   **Editorial Magazine Grid:** Series layouts dynamically wrap around text commentary in a modern fluid layout, preserving original image geometry (3:2, 3:4, and vertical crops) natively without force-cropping or stretching.
-*   **Artistic 4-Way Lightbox:** Features a progressive viewport engine that allows users to seamlessly switch background environments—from pure minimal photo paper edges on a gallery wall to full museum passepartout frame rendering with deep drop shadows.
-*   **Smart Exif Importer:** Extracts EXIF data batch-wise using `exiftool`, converts raw source files (`.tif`) into high-performance web formats (`.webp`), and automatically creates localized thumbnail previews.
-*   **Pandoc Header & Tag Parsing:** Directly extracts collection titles and custom metadata tagging keywords (e.g., `% tags: landscape, winter`) from standard Pandoc Markdown text files.
-*   **Hidden Standalone Pools:** Allows directories starting with an underscore (e.g., `_singles/`) to remain hidden from the main listings, while their photos safely participate in the randomized homepage stream.
 
 ---
 
@@ -31,28 +27,18 @@ Organize your raw photographic master archives on your hard drive outside the re
 
 ```text
 source_photos/
-├── almaznoe/
-│   ├── README.md      # Pandoc Markdown config file
+├── ablum/
 │   ├── frame_01.tif   # Master image assets
 │   └── frame_02.tif
 │
-├── _singles/          # Directory starting with "_" remains hidden
-│   ├── isolated_1.tif # Participates strictly in the home page pool
-│   └── isolated_2.tif
+├── another/           
+│   ├── frame_01.tif 
+│   └── frame_02.tif
 ```
 
-The `README.md` file configuration should use the **Pandoc Markdown** metadata header standard:
+### 2. Preparing Container Environment
 
-```markdown
-% Almaznoe
-% tags: landscape, winter, melancholy, mist, Ukraine
-
-This text will be rendered as the main editorial article column on the series page...
-```
-
-### 2. Setting Up the Container Environment
-
-**web-exposure** is fully containerized to run safely inside a rootless **Podman** or Docker container, removing any requirement to manage local system runtimes.
+**Exposure** is fully containerized to run safely inside a rootless **Podman** or Docker container, removing any requirement to manage local system runtimes.
 
 1. Build the local secure container image:
    ```bash
@@ -64,11 +50,11 @@ This text will be rendered as the main editorial article column on the series pa
    ```
    *On your initial execution, the pipeline will interactively prompt you for your absolute local `source_photos/` hard drive path, and securely save it in a `.gitignore`-protected `.env` and `local_config.yml` file for all subsequent sessions.*
 
-### 3. Rake Command Reference
+### 3. Rake Command Interface
 
 All routine deployment and management behaviors are managed via the `rake` suite inside the container workspace:
 
-*   **`rake photo:import`**
+*   **`rake gallery:import`**
     Synchronizes the external source photo tree. Automatically parses Pandoc metadata headers, extracts EXIF fields, processes raw `.tif` files into optimized FullHD `.webp` sheets and 600px preview thumbnails, and purges obsolete or deleted media assets.
 *   **`rake site:serve`**
     Launches the local embedded development server. Mounts file watchers in real-time, hosting your layout preview locally at `http://localhost:4000`. This task runs by default on `podman compose up`.
@@ -79,124 +65,29 @@ All routine deployment and management behaviors are managed via the `rake` suite
 
 ---
 
+### 4. Photo describing routine
+
+TODO: present here the work for describing albums and providing image metadata (ALBUM.md, ALBUM.yml)
+
 ## Structure
 
-The project repository structure
+TODO: epxlain here the project repository structure
 
-
-.
-├── bin
-│   └── console
-├── CHANGELOG.md
-├── docker-compose.yml
-├── Dockerfile
-├── docs
-│   ├── assets (documentations assets)
-│   │   ├── about_view.svg
-│   │   ├── album_view.svg
-│   │   ├── lightbox_view.svg
-│   │   ├── main_layout.svg
-│   │   ├── main_portfolio_view.svg
-│   │   ├── series_view.svg
-│   │   └── uikit_demo.svg
-│   ├── SPEC.md (started software requirements specfication, mainly to fully expand the context of the project)
-│   └── UI_UX_SPEC.md
-├── Gemfile
-├── Gemfile.lock
-├── guides (preserves hlpful AI information)
-│   ├── ALBUM_PRESENTATION_GUIDE.md
-│   └── DESIGN-PRINCIPLES.md
-├── HISTORY.md (contains the very first AI sessions log)
-├── lib
-│   ├── exposure
-│   │   ├── adapters
-│   │   │   ├── exif_tool_adapter.rb
-│   │   │   └── image_magick_adapter.rb
-│   │   ├── adapters.rb
-│   │   ├── basic
-│   │   │   └── time_extentions.rb
-│   │   ├── basic.rb
-│   │   ├── builder
-│   │   │   ├── album.rb
-│   │   │   ├── base.rb
-│   │   │   └── user_album.rb
-│   │   ├── builder.rb
-│   │   ├── config.rb
-│   │   ├── decorator
-│   │   │   └── site_album.rb
-│   │   ├── decorator.rb
-│   │   ├── model
-│   │   │   ├── album.rb
-│   │   │   ├── base.rb
-│   │   │   ├── description.rb
-│   │   │   ├── gallery.rb
-│   │   │   └── image.rb
-│   │   ├── model.rb
-│   │   ├── ports
-│   │   │   ├── exif_metadata.rb
-│   │   │   └── image_transformation.rb
-│   │   ├── ports.rb
-│   │   ├── presenter
-│   │   │   ├── base.rb
-│   │   │   ├── site_album.rb
-│   │   │   └── user_album.rb
-│   │   ├── presenter.rb
-│   │   ├── tasks
-│   │   │   ├── build_album.rb
-│   │   │   ├── build_gallery.rb
-│   │   │   ├── build_site_album.rb
-│   │   │   └── build_site.rb
-│   │   ├── tasks.rb
-│   │   └── version.rb
-│   └── exposure.rb
-├── local_config.yml
-├── Rakefile
-├── rakelib
-│   ├── gallery.rake
-│   └── site.rake
-├── README.md
-├── resume-to-start.md
-├── site
-│   ├── about.md
-│   ├── assets
-│   │   ├── css
-│   │   │   ├── main.scss
-│   │   │   └── style.css
-│   │   ├── gallery
-│   │   └── presets
-│   │       └── blank_holder.webp
-│   ├── _config.yml
-│   ├── _data
-│   ├── _drafts
-│   ├── favicon.svg
-│   ├── focusing_screen.svg
-│   ├── focusing_screen_tight.svg
-│   ├── focus.svg
-│   ├── _includes
-│   │   ├── analytics.html
-│   │   └── lightbox.html
-│   ├── index.md
-│   ├── _layouts
-│   │   ├── default.html
-│   │   └── series.html
-│   ├── _posts
-│   ├── robots.txt
-│   ├── _sass
-│   │   └── base.scss
-│   ├── _series
-│   │   ├── almaznoe.md
-│   │   ├── bubbles.md
-│   │   ├── svalovichi.md
-│   │   └── vaseline.md
-│   └── series.md
-├── TODO.md (latest plans for the project advancement)
-
+```
+- specs        # requirements specifications and other artifactx
+- guides       # some guides
+- site         # site directory, Jekyll
+- lib          # Ruby
+- test         # Ruby tests
+```
 
 ## Design
 
-TODO: desing Architecture Design Document docs/ARCH.md and provide link
+TODO: design and reference here the Architecture Design Document docs/ARCH.md
 
-## Other techs
+## Techs
 
-- Yard ruby documentation tool
-- Jekyll and Github Pages
+- Ruby (YARD)
+- Pandoc Markdown
+- Github Pages, Jekyll
+- Geminy AI

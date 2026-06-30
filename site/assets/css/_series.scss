@@ -47,6 +47,16 @@
   box-shadow: 0 8px 24px rgba(0,0,0,0.12) !important;
   transition: transform 0.3s ease !important;
   border: 6px solid #ffffff !important;
+  /* 
+     FIXED FINE-ART COMPOSITE BORDER:
+     Using box-shadow to paint a dual-layer effect:
+     1. A solid 6px crisp white fine-art paper margin boundary.
+     2. A soft, elegant gallery drop-shadow extending outwards.
+     This technique guarantees that overlapping layers never clip or hide the borders!
+  */
+  box-shadow: 
+    0 0 0 6px #ffffff, 
+    0 12px 32px rgba(0, 0, 0, 0.15) !important;
 }
 
 /* Enforce exact micro-offsets stack order using child indexation */

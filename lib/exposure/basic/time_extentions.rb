@@ -35,7 +35,8 @@ class ::Time
       end
 
     # 3. Formulate the clean contextual sentence balance mapping
-    return "#{daylight_context} during #{season_phase}" unless month.between?(3, 5) || month.between?(9, 11)
+    return "#{daylight_context} during #{season_phase}" \
+      unless month.between?(3, 5) || month.between?(9, 11)
 
     # Clean execution flow for transitional seasons avoiding nested branches
     case hour

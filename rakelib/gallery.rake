@@ -35,7 +35,7 @@ namespace :gallery do
     )
     
     # Freeze the infrastructure layer globally at boot time
-    Exposure::Ports::Adapters.setup(container)
+    Exposure::Ports::Context.setup(container)
 
     # 3. Trigger the final production site compile pipeline orchestrator cleanly
     puts "[Pipeline] Generating fluid WebP prints and site asset trees..."
