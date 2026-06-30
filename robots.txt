@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Direct link to the automatically generated sitemap
+Sitemap: https://nvoynov.github.io/exposure/sitemap.xml
+
