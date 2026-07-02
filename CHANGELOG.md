@@ -4,14 +4,11 @@
 
 __Site Design__
 
-- [ ] redesign series collage
-  - [ ] and slim white border for image
-  - [ ] try to elimiate the colage breaks on mobile phone
-- [ ] discuss other possible collage repreaentaions to present each series with differen shape; maybe different items numbers, etc.
-- [ ] return lost "lens/avatar" for `/about` page
+- [ ] redesign `/index` for mobile phones - when there is no place for main Todd Hido like mosaic, the page should present ...
 
 __Ruby Design__
 
+- [ ] redesign `Task::BuildSite` according to "Pipes and Filters"
 - [ ] improve image metadata describing process
   - [ ] establish a strategy to serve SEO effectively
   - [ ] maybe, build an AI Agent to serve the purpose
@@ -21,6 +18,16 @@ __Repo Design__ (analyst)
 
 - [ ] discuss the content and design some Architecture Design Document
 - [ ] extend /spec/SPEC.md by providing function requirement example 
+### [v0.1.1] — 2026-07-02
+
+- fixed series Series storyboard wrong order after import
+- fixed lost images which was in site/assets/gallery but was removed form the album source.
+- added thin white border for Series collage on ``/series`
+- added Caching:
+  - `Task::BuildManifest` renders `assets-manifest.json`
+  - integrated dymnamic (*Path-Agnostic*) Service Worker providing *Cache-First* strategy for images.
+- added series order on `/series` based on the latest `Image#created_at` of album.
+- changed album `slug` based on dashing `Album#title`
 
 ### 2026-06-30
 
@@ -30,7 +37,7 @@ __Repo Design__ (analyst)
 - renamed `Ports::Adapters` into `Ports::Context`
 - designed site caching strategy (see assumptions document)
 
-### v0.1.0 (2026-06-29)
+### [v0.1.0] - 2026-06-29
 
 - Designed final brandmark, glyph, and watermark
 - Ruby redesigned to follow Tne Clean Architecture

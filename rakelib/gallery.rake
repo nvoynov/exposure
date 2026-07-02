@@ -1,3 +1,4 @@
+require 'logger'
 require_relative '../lib/exposure'
 
 namespace :gallery do
@@ -28,13 +29,17 @@ namespace :gallery do
     # 2. Spin up concrete infrastructure adapters and lock them into the registry
     puts "[Infrastructure] Initializing system I/O tool adapters..."
     
-    # Updated: renamed metadata_port slot to exif_metadata
-    container = Struct.new(:exif_metadata, :image_transformation).new(
+    stdlib_logger = Logger.new($stdout)
+    stdlib_logger.formatter = proc do |severity, datetime, progname, msg|
+      "[#{severity}] #{msg}\n"
+    end
+
+    container = Struct.new(:exif_metadata, :image_transformation, :logger).new(
       Exposure::Adapters::ExifToolAdapter.new,
-      Exposure::Adapters::ImageMagickAdapter.new
+      Exposure::Adapters::ImageMagickAdapter.new,
+      stdlib_logger
     )
     
-    # Freeze the infrastructure layer globally at boot time
     Exposure::Ports::Context.setup(container)
 
     # 3. Trigger the final production site compile pipeline orchestrator cleanly

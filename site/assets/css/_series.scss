@@ -1,86 +1,176 @@
-
 /* ==========================================================================
    SERIES OVERVIEW & SCATTERED PREVIEW CARDS CLOUD
    ========================================================================== */
 
-/* Main Series Layout Grid Wrapper */
-.series-grid-container {
-  display: grid !important;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important;
-  gap: 40px !important;
-  width: 100% !important;
-  margin-top: 20px !important;
-}
-
-/* Individual Series Card Framework */
-.series-card-item {
+/* Sketchbook container layout holding the scattered clouds */
+.collections-sketchbook {
+  max-width: 900px !important;
+  margin: 0 auto !important;
+  padding: 3rem 1rem !important;
   display: flex !important;
   flex-direction: column !important;
-  text-decoration: none !important;
-  color: inherit !important;
-  margin-bottom: 30px !important;
-
-  &:hover {
-    .series-preview-cloud img {
-      transform: translateY(-4px) scale(1.02) !important;
-    }
-  }
+  gap: 6rem !important; /* Large gaps between clouds to give them breathing room */
 }
 
-/* Pack exactly 5 preview cards into a tight scattered stack */
-.series-preview-cloud {
+/* Base bounding container for an individual cloud collage */
+.album-cloud-canvas {
   display: block !important;
   position: relative !important;
-  height: 280px !important; /* Forces strict window lock boundary */
   width: 100% !important;
-  margin: 20px 0 50px 0 !important;
-  background-color: #fafafa !important;
-  border: 1px solid #f0f0f0 !important;
-  overflow: hidden !important;
+  max-width: 500px !important; /* Constrains the cloud to a controlled rectangular workspace */
+  height: 380px !important;
+  text-decoration: none !important;
+  transition: transform 0.4s ease !important;
 }
 
-/* Target ANY image element inside the cloud container directly */
-.series-preview-cloud img {
+/* SCATTER EFFECT: Shifts odd and even clouds horizontally and tilts them slightly */
+.album-cloud-canvas:nth-child(odd) {
+  align-self: flex-start !important;
+  transform: rotate(-1deg) !important;
+}
+.album-cloud-canvas:nth-child(even) {
+  align-self: flex-end !important;
+  transform: rotate(1.5deg) !important;
+  margin-right: 5% !important;
+}
+
+/* Gentle hover interaction for the entire collage cluster */
+.album-cloud-canvas:hover {
+  transform: scale(1.02) rotate(0deg) !important;
+}
+
+/* Internal wrapper that anchors absolute-positioned stacked photographs */
+.cloud-photos-wrapper {
+  position: relative !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 1 !important;
+}
+
+/* Shared rules for individual overlapping photo items inside the cloud */
+.cloud-pic {
   position: absolute !important;
-  width: 65% !important; /* Balanced scale on narrow viewports */
-  height: auto !important;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12) !important;
-  transition: transform 0.3s ease !important;
-  border: 6px solid #ffffff !important;
+  background-color: #fcfcfc !important;
+  overflow: hidden !important;
+  aspect-ratio: 3 / 2 !important;
+  transition: transform 0.3s ease, z-index 0s !important;
+
   /* 
-     FIXED FINE-ART COMPOSITE BORDER:
-     Using box-shadow to paint a dual-layer effect:
-     1. A solid 6px crisp white fine-art paper margin boundary.
-     2. A soft, elegant gallery drop-shadow extending outwards.
-     This technique guarantees that overlapping layers never clip or hide the borders!
+     FIXED FINE-ART COMPOSITE BORDER & SHADOW:
+     Injects a solid 5px clean white passepartout framing margin.
+     Combined with a subtle drop shadow to prevent overlap clipping.
   */
   box-shadow: 
-    0 0 0 6px #ffffff, 
-    0 12px 32px rgba(0, 0, 0, 0.15) !important;
+    inset 0 0 0 5px #ffffff,
+    0 4px 15px rgba(0,0,0,0.06) !important;
+
+  img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    
+    /* Strategic safety padding pushes image content inside the 5px border framework */
+    padding: 5px !important;
+    box-sizing: border-box !important;
+  }
 }
 
-/* Enforce exact micro-offsets stack order using child indexation */
-.series-preview-cloud img:nth-child(1) { left: 4%;  top: 10px;  z-index: 1; transform: rotate(-4deg); }
-.series-preview-cloud img:nth-child(2) { left: 12%; top: 25px;  z-index: 2; transform: rotate(5deg); }
-.series-preview-cloud img:nth-child(3) { left: 20%; top: 40px;  z-index: 3; transform: rotate(-2deg); }
-.series-preview-cloud img:nth-child(4) { left: 28%; top: 55px;  z-index: 4; transform: rotate(3deg); }
-.series-preview-cloud img:nth-child(5) { left: 36%; top: 70px;  z-index: 5; transform: rotate(-1deg); box-shadow: 0 12px 32px rgba(0,0,0,0.16) !important; }
+/* The Chaotic Cloud Overlap Pattern Coordinate Distribution */
+.pic-base { width: 55% !important; left: 20% !important; top: 15% !important; z-index: 10 !important; transform: rotate(-2deg) !important; }
+.pic-offset-one { width: 45% !important; left: 5% !important; top: 5% !important; z-index: 5 !important; transform: rotate(4deg) !important; }
+.pic-offset-two { width: 42% !important; right: 5% !important; top: 8% !important; z-index: 8 !important; transform: rotate(-5deg) !important; }
+.pic-offset-three { width: 48% !important; left: 12% !important; bottom: 5% !important; z-index: 12 !important; transform: rotate(3deg) !important; }
+.pic-offset-four { width: 44% !important; right: 10% !important; bottom: 12% !important; z-index: 7 !important; transform: rotate(-3deg) !important; }
 
-/* Album Typography Block Metadata */
-.series-meta-block {
-  margin-top: 15px !important;
+/* Lift the specific hovered photo to the top of the local stack */
+.cloud-pic:hover {
+  z-index: 50 !important;
+  transform: scale(1.04) rotate(0deg) !important;
+  box-shadow: 
+    inset 0 0 0 5px #ffffff,
+    0 12px 28px rgba(0,0,0,0.12) !important;
+}
 
-  .series-title {
-    font-size: 14px !important;
-    font-weight: 600 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px !important;
-    margin-bottom: 5px !important;
+/* Album title typography and placement */
+.cloud-title-block {
+  position: absolute !important;
+  z-index: 20 !important;
+  bottom: -30px !important;
+  left: 5% !important;
+  pointer-events: none !important;
+}
+
+/* Pull title to the right side on mirrored even cloud canvases */
+.album-cloud-canvas:nth-child(even) .cloud-title-block {
+  left: auto !important;
+  right: 5% !important;
+  text-align: right !important;
+}
+
+.cloud-title-block h3 {
+  margin: 0 !important;
+  font-weight: 300 !important;
+  font-size: 1.05rem !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  color: #1a1a1a !important;
+  background-color: rgba(251, 251, 251, 0.85) !important;
+  padding: 5px 10px !important;
+  display: inline-block !important;
+}
+
+/* ==========================================================================
+   PRODUCTION RESPONSIVE MOBILE OPTIMIZATION BREAKPOINTS FOR CLOUD COLLAGES
+   ========================================================================== */
+@media (max-width: 767px) {
+  .collections-sketchbook {
+    gap: 5.5rem !important;
+    padding: 2rem 1rem !important;
   }
 
-  .series-details {
-    font-size: 11px !important;
-    color: var(--text-muted) !important;
-    letter-spacing: 0.2px !important;
+  .album-cloud-canvas {
+    height: 180px !important;
+    max-width: 100% !important;
+    align-self: center !important;
+    margin-bottom: 20px !important;
+  }
+
+  .album-cloud-canvas:nth-child(even) {
+    align-self: center !important;
+    margin-right: 0 !important;
+  }
+  
+  .cloud-pic {
+    box-shadow: 
+      inset 0 0 0 4px #ffffff,
+      0 6px 16px rgba(0, 0, 0, 0.08) !important;
+
+    img {
+      padding: 4px !important;
+    }
+  }
+
+  .pic-base { width: 48% !important; left: 26% !important; top: 0 !important; z-index: 10 !important; transform: rotate(-1.5deg) !important; }
+  .pic-offset-one { width: 42% !important; left: 2% !important; top: -10px !important; z-index: 5 !important; transform: rotate(3deg) !important; }
+  .pic-offset-two { width: 40% !important; right: 2% !important; top: -5px !important; z-index: 8 !important; transform: rotate(-4deg) !important; }
+  .pic-offset-three { width: 44% !important; left: 8% !important; top: 25px !important; z-index: 12 !important; transform: rotate(2deg) !important; }
+  .pic-offset-four { width: 42% !important; right: 6% !important; top: 30px !important; z-index: 7 !important; transform: rotate(-2deg) !important; }
+
+  .cloud-title-block {
+    bottom: -40px !important;
+    left: 0 !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+  
+  .album-cloud-canvas:nth-child(even) .cloud-title-block {
+    left: 0 !important;
+    right: auto !important;
+    text-align: center !important;
+  }
+
+  .cloud-title-block h3 {
+    font-size: 0.95rem !important;
+    padding: 4px 8px !important;
   }
 }

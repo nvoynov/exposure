@@ -23,7 +23,8 @@ module Exposure
       # UPDATED: Delegates directly to the new Ports::Context execution layer
       def_delegators :'Exposure::Ports::Context',
                      :exif_metadata,
-                     :image_transformation
+                     :image_transformation,
+                     :logger
     end
   end
 end

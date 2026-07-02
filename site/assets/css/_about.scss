@@ -1,25 +1,26 @@
 /* ==========================================================================
-   ABOUT PAGE LAYOUT & TECHNICAL BLUEPRINT VECTOR STYLES
+   ABOUT PAGE LAYOUT - MINIMALIST SINGLE COLUMN COLOPHON
    ========================================================================== */
 
 /* 1. Master Container Layout Configuration */
 .about-container-layout {
-  display: grid !important;
-  grid-template-columns: 55% 45% !important; /* Editorial uneven column lines */
-  gap: 50px !important;
-  align-items: center !important;
+  display: block !important;
   width: 100% !important;
-  margin-top: 30px !important;
+  margin-top: 40px !important;
 }
 
-/* 2. Text Content Block Editorial Typography */
+/* 2. Text Content Block Editorial Typography & Reading Line Bounds */
 .about-text-content-block {
+  max-width: 650px !important; /* Perfect line length for maximum readability scale */
+  margin: 0 auto !important;    /* Centers the reading colophon on the desktop canvas */
+
   h2 {
     font-weight: 300 !important;
     font-size: 22px !important;
     letter-spacing: 2px !important;
     text-transform: uppercase !important;
     margin-bottom: 25px !important;
+    text-align: left !important;
   }
 
   h3 {
@@ -29,14 +30,15 @@
     text-transform: uppercase !important;
     margin-top: 40px !important;
     margin-bottom: 20px !important;
+    text-align: left !important;
   }
 
-  /* FIXED: Restored rich readable text font scale and generous leading */
   p {
     color: #333333 !important;
-    font-size: 13.5px !important;    /* Clean, comfortable editorial scale */
-    line-height: 1.75 !important;   /* Generous book-like breathing space */
+    font-size: 13.5px !important;
+    line-height: 1.75 !important;
     margin-bottom: 22px !important;
+    text-align: left !important;
   }
 
   hr {
@@ -60,45 +62,15 @@
   }
 }
 
-/* 4. Right Column Blueprint Canvas Wrapper */
-.about-artwork-blueprint {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  width: 100% !important;
-  max-width: 320px !important;
-  margin: 0 auto !important;
-}
-
-.about-focus-screen-svg {
-  width: 100% !important;
-  height: auto !important;
-  display: block !important;
-}
-
-/* Technical camera focus screen blueprint lines */
-.blueprint-line {
-  fill: none !important;
-  stroke: var(--text-primary) !important;
-  stroke-linecap: round !important;
-  stroke-linejoin: round !important;
-  opacity: 0.12 !important; /* Subdued technical draft look */
-  transition: stroke 0.3s ease, opacity 0.3s ease !important;
-}
-
 /* ==========================================================================
    PRODUCTION RESPONSIVE MOBILE BREAKPOINTS
    ========================================================================== */
 @media (max-width: 767px) {
   .about-container-layout {
-    display: flex !important;
-    flex-direction: column-reverse !important; /* Text on top, blueprint icon on bottom */
-    gap: 40px !important;
+    margin-top: 20px !important;
   }
-
-  .about-artwork-blueprint {
-    max-width: 200px !important;
-    margin: 20px auto 0 auto !important;
+  
+  .about-text-content-block {
+    padding: 0 10px !important; /* Safety margins padding for mobile phone edges */
   }
 }
-

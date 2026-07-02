@@ -10,7 +10,7 @@ module Exposure
         extend Forwardable
 
         # Proxy calls directly to the internal immutable instance variables
-        def_delegators :@instance, :exif_metadata, :image_transformation
+        def_delegators :@instance, :exif_metadata, :image_transformation, :logger
 
         # Boot-time dependency injection engine setup gate.
         # Once initialized, the global infrastructure layer is frozen forever.

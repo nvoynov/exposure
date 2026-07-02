@@ -55,13 +55,22 @@ module Exposure
 
         # 4. Dump clean flat updates back to author environment files
         payload = Presenter::UserAlbum.new.call(final_album)
-        File.write(md_path, payload[:md_content])
-        File.write(yml_path, payload[:yml_content])
+        
+        # FIXED: Only trigger physical disk writes if text content actually changed
+        write_if_changed(md_path, payload[:md_content])
+        write_if_changed(yml_path, payload[:yml_content])
 
         final_album
       end
 
       private
+
+      def write_if_changed(path, content)
+        if File.exist?(path)
+          return if File.read(path) == content
+        end
+        File.write(path, content)
+      end
 
       # Compiles raw metadata fields into structured immutable image models pool
       def build_fresh_images_pool(dirname, master_files, exif_catalog)
