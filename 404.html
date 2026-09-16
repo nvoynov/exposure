@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Standard Primary SEO Layer -->
+  <title>Page Not Found | Nikolay Voynov Exposure</title>
+  <meta name="description" content="The requested photography series or page could not be located.">
+  
+  <!-- Absolute Canonical Anchor: Automated by Rake and calculated per page model -->
+  <link rel="canonical" href="https://nvoynov.github.io/exposure/404.html">  
+  
+  <!-- Open Graph / Facebook Production Layer -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nvoynov.github.io/exposure/404.html">
+  <meta property="og:title" content="Page Not Found | Nikolay Voynov Exposure">
+  <meta property="og:description" content="The requested photography series or page could not be located.">
+  <meta property="og:image" content="/exposure/assets/og_image.png">
+
+  <!-- Branding Visual Identities Core Assets -->
+  <link rel="icon" type="image/svg+xml" href="/exposure/assets/favicon.svg">
+  <!-- 2. Dynamic root path injection for the master stylesheet -->
+  <link rel="stylesheet" href="/exposure/assets/css/style.css">
+</head>
+
+<body>
+  
+  <div class="site-container">
+    <header class="site-header">
+      <div class="site-title">
+        <div class="site-title-text">
+          <a href="/exposure/index.html">
+            Nikolay Voynov
+            <img src="/exposure/assets/glyph.svg" class="header-divider-icon" alt="" />
+            Exposure
+          </a>
+        </div>
+      </div>
+
+      <!-- Core site navigation links with injected paths -->
+      <nav class="site-nav">
+        <!-- 5. Dynamic root path injection for navigation mapping -->
+        <a href="/exposure/index.html" class="nav-link">Home</a>
+        <a href="/exposure/series.html" class="nav-link">Series</a>
+        <a href="/exposure/about.html" class="nav-link">About</a>
+      </nav>
+    </header>
+
+    <!-- Pandoc native body injection channel -->
+    <!-- src/templates/analytics.html -->
+    <!-- Google tag (gtag.js) analytics injection layer -->
+    <script async src="https://googletagmanager.com"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-BS1SV9PZLK');
+    </script>
+
+    <main class="content-container">
+      <!-- Native Markdown text output channel compiled by Pandoc -->
+      <div class="page-main-body-content">
+        <section id="section" class="error-page-container">
+        <h1>404</h1>
+        <p>The page or photographic series you are looking for does not
+        exist, has been archived, or has been moved to a restricted
+        directory layer.</p>
+        <div class="error-return-link">
+        <p><a href="index.html">Return to Main Exhibition</a></p>
+        </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Pandoc native body injection channel -->
+    
+
+    <footer>
+      <p>&copy; 2026 Nikolay Voynov. All rights reserved.</p>
+      <p style="font-size: 0.75rem; opacity: 0.6; margin-top: 5px;">
+        No images or text on this site may be reproduced or transmitted 
+        in any form without prior written permission.
+      </p>
+    </footer>
+
+    <!-- Progressive Web App Caching Lifecycle Activation -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/exposure/sw.js')
+            .then(reg => console.log('==> [PWA Engine] ServiceWorker successfully registered:', reg.scope))
+            .catch(err => console.error('--> [PWA Engine] ServiceWorker registration failed:', err));
+        });
+      }
+    </script>
+  </div>
+</body>
+</html>
